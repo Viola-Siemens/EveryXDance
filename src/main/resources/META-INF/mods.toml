@@ -1,0 +1,27 @@
+modLoader="javafml"
+loaderVersion="[46,)"
+license="MIT"
+issueTrackerURL="https://github.com/Viola-Siemens/EveryXDance/issues"
+
+[[mods]]
+modId="everyxdance"
+version="${file.jarVersion}"
+displayName="EveryXDance"
+logoFile="logo.png"
+credits="Liu Dongyu"
+authors="Hexagram"
+description="As we know, piglins can dance. So can other mobs dance? The answer is YES!"
+
+[[dependencies.everyxdance]]
+    modId="forge"
+    mandatory=true
+    versionRange="[46,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.everyxdance]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20,1.21)"
+    ordering="NONE"
+    side="BOTH"
