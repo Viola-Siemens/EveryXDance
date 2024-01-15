@@ -1,7 +1,8 @@
 package com.hexagram2021.everyxdance.client;
 
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
-import com.hexagram2021.everyxdance.common.event.CollectDancePresetEvent;
+import com.hexagram2021.everyxdance.client.event.CollectDancePresetEvent;
+import com.hexagram2021.everyxdance.common.util.EveryXDanceLogger;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -20,13 +21,20 @@ public class EveryXDanceClient {
 		ModLoader.get().postEventWrapContainerInModOrder(collectDancePresetEvent);
 		IDanceableModel.PRESETS.clear();
 		IDanceableModel.PRESETS.addAll(collectDancePresetEvent.getPresets());
+		IDanceableModel.PRESETS.sort(IDanceableModel.Preset::compareTo);
+		EveryXDanceLogger.info("Dancing Animations (size %d):".formatted(IDanceableModel.PRESETS.size()));
+		for(int i = 0; i < IDanceableModel.PRESETS.size(); ++i) {
+			EveryXDanceLogger.info("(%d) - %s".formatted(i, IDanceableModel.PRESETS.get(i).name()));
+		}
 	}
 	@SubscribeEvent
 	public static void onCollectDancePreset(CollectDancePresetEvent event) {
-		event.register(new ResourceLocation(MODID, "piglin_dance").toString(), (model, ageInTicks) -> {
+		event.register(new ResourceLocation(MODID, "piglin_dance"), (model, ageInTicks) -> {
 			float rate = ageInTicks / 60.0F;
 			model.everyxdance$getHead().x = Mth.sin(rate * 10.0F);
 			model.everyxdance$getHead().y = Mth.sin(rate * 40.0F) + 0.4F;
+			model.everyxdance$getBody().y = Mth.sin(rate * 40.0F) * 0.35F;
+			model.everyxdance$getBody().zRot = Mth.DEG_TO_RAD * Mth.cos(rate * 20.0F) * 3.0F;
 			ModelPart rightArm = model.everyxdance$getRightArm();
 			if(rightArm != null) {
 				rightArm.zRot = Mth.DEG_TO_RAD * (70.0F + Mth.cos(rate * 40.0F) * 10.0F);
@@ -45,8 +53,6 @@ public class EveryXDanceClient {
 			if(leftLeg != null) {
 				leftLeg.zRot = Mth.DEG_TO_RAD * Mth.cos(rate * 40.0F) * 5.0F;
 			}
-			model.everyxdance$getBody().y = Mth.sin(rate * 40.0F) * 0.35F;
-			model.everyxdance$getBody().zRot = Mth.DEG_TO_RAD * Mth.cos(rate * 20.0F) * 3.0F;
 		});
 	}
 }

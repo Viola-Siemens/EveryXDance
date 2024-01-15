@@ -2,10 +2,9 @@ package com.hexagram2021.everyxdance.mixin.client;
 
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
-import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.ChickenModel;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.world.entity.LivingEntity;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -14,27 +13,29 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(HumanoidModel.class)
-public class HumanoidModelMixin<T extends LivingEntity> implements IDanceableModel {
+@Mixin(ChickenModel.class)
+public class ChickenModelMixin<T extends Entity> implements IDanceableModel {
 	@Shadow @Final
-	public ModelPart head;
+	private ModelPart head;
 	@Shadow @Final
-	public ModelPart body;
+	private ModelPart body;
 	@Shadow @Final
-	public ModelPart rightArm;
+	private ModelPart rightWing;
 	@Shadow @Final
-	public ModelPart leftArm;
+	private ModelPart leftWing;
 	@Shadow @Final
-	public ModelPart rightLeg;
+	private ModelPart rightLeg;
 	@Shadow @Final
-	public ModelPart leftLeg;
+	private ModelPart leftLeg;
+	@Shadow @Final
+	private ModelPart beak;
 
 	@Unique
 	private Backup everyxdance$backup = Backup.empty();
 	@Unique
 	private boolean everyxdance$reset = true;
 
-	@Inject(method = "setupAnim(Lnet/minecraft/world/entity/LivingEntity;FFFFF)V", at = @At(value = "RETURN"))
+	@Inject(method = "setupAnim", at = @At(value = "RETURN"))
 	private void everyxdance$setupAnimIfDancing(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
 		if(entity instanceof IDanceableEntity danceableEntity && danceableEntity.everyxdance$isDancing()) {
 			if(this.everyxdance$reset) {
@@ -58,11 +59,11 @@ public class HumanoidModelMixin<T extends LivingEntity> implements IDanceableMod
 	}
 	@Override
 	public ModelPart everyxdance$getRightArm() {
-		return this.rightArm;
+		return this.rightWing;
 	}
 	@Override
 	public ModelPart everyxdance$getLeftArm() {
-		return this.leftArm;
+		return this.leftWing;
 	}
 	@Override
 	public ModelPart everyxdance$getRightLeg() {
@@ -72,9 +73,9 @@ public class HumanoidModelMixin<T extends LivingEntity> implements IDanceableMod
 	public ModelPart everyxdance$getLeftLeg() {
 		return this.leftLeg;
 	}
-	@Override @Nullable
+	@Override
 	public ModelPart everyxdance$getNose() {
-		return null;
+		return this.beak;
 	}
 
 	@Override

@@ -14,6 +14,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import static com.hexagram2021.everyxdance.common.util.RegistryHelper.getRegistryName;
+
 @Mixin(Mob.class)
 public class MobEntityMixin implements IDanceableEntity {
 	@Inject(method = "<clinit>", at = @At(value = "TAIL"))
@@ -45,7 +47,7 @@ public class MobEntityMixin implements IDanceableEntity {
 		}
 		Mob current = (Mob)(Object)this;
 		LivingEntity target = current.getTarget();
-		if(target != null && target.isDeadOrDying() &&
+		if(target != null && target.isDeadOrDying() && EveryXDanceCommonConfig.DANCEABLE_MOB_TYPES.get().contains(getRegistryName(current.getType()).toString()) &&
 				RandomSource.create(current.level().getGameTime()).nextInt(100) < EveryXDanceCommonConfig.MOB_DANCE_POSSIBILITY.get()) {
 			this.everyxdance$startDancing();
 		}

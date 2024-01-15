@@ -2,9 +2,9 @@ package com.hexagram2021.everyxdance.mixin.client;
 
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
-import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.RavagerModel;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Ravager;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,28 +14,28 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(HumanoidModel.class)
-public class HumanoidModelMixin<T extends LivingEntity> implements IDanceableModel {
+@Mixin(RavagerModel.class)
+public class RavagerModelMixin implements IDanceableModel {
 	@Shadow @Final
-	public ModelPart head;
+	private ModelPart root;
 	@Shadow @Final
-	public ModelPart body;
+	private ModelPart head;
 	@Shadow @Final
-	public ModelPart rightArm;
+	private ModelPart rightFrontLeg;
 	@Shadow @Final
-	public ModelPart leftArm;
+	private ModelPart leftFrontLeg;
 	@Shadow @Final
-	public ModelPart rightLeg;
+	private ModelPart rightHindLeg;
 	@Shadow @Final
-	public ModelPart leftLeg;
+	private ModelPart leftHindLeg;
 
 	@Unique
 	private Backup everyxdance$backup = Backup.empty();
 	@Unique
 	private boolean everyxdance$reset = true;
 
-	@Inject(method = "setupAnim(Lnet/minecraft/world/entity/LivingEntity;FFFFF)V", at = @At(value = "RETURN"))
-	private void everyxdance$setupAnimIfDancing(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
+	@Inject(method = "setupAnim(Lnet/minecraft/world/entity/monster/Ravager;FFFFF)V", at = @At(value = "RETURN"))
+	private void everyxdance$setupAnimIfDancing(Ravager entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
 		if(entity instanceof IDanceableEntity danceableEntity && danceableEntity.everyxdance$isDancing()) {
 			if(this.everyxdance$reset) {
 				this.everyxdance$reset = false;
@@ -54,23 +54,23 @@ public class HumanoidModelMixin<T extends LivingEntity> implements IDanceableMod
 	}
 	@Override
 	public ModelPart everyxdance$getBody() {
-		return this.body;
+		return this.root.getChild("body");
 	}
 	@Override
 	public ModelPart everyxdance$getRightArm() {
-		return this.rightArm;
+		return this.rightFrontLeg;
 	}
 	@Override
 	public ModelPart everyxdance$getLeftArm() {
-		return this.leftArm;
+		return this.leftFrontLeg;
 	}
 	@Override
 	public ModelPart everyxdance$getRightLeg() {
-		return this.rightLeg;
+		return this.rightHindLeg;
 	}
 	@Override
 	public ModelPart everyxdance$getLeftLeg() {
-		return this.leftLeg;
+		return this.leftHindLeg;
 	}
 	@Override @Nullable
 	public ModelPart everyxdance$getNose() {
