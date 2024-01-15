@@ -1,0 +1,30 @@
+name: Question
+description: What kind of information would you like to ask?
+title: "[Question]: "
+labels: [ "Question" ]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your supporting!
+  - type: checkboxes
+    id: question-type
+    attributes:
+      label: Question Type
+      description: What type of the question would you describe?
+      options:
+      - label: Dance Animation
+      - label: Mod Porting
+      - label: Mod Compatibility
+      - label: Dependency Development (Code or Documentation)
+      - label: Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description of the Question
+      description: What's puzzling you?
+      placeholder: Feel free to describe what you thought :)
+    validations:
+      required: true

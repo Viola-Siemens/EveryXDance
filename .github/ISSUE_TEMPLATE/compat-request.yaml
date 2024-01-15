@@ -1,0 +1,25 @@
+name: Compat Request
+description: Make this mod compatible with another mod. For example, add animation for mobs.
+title: "[Compat]: "
+labels: [ "Mod Compat" ]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your supporting!
+  - type: input
+    id: mod-name
+    attributes:
+      label: Mod Name
+      description: The name of your mod. You can also leave a link here.
+      placeholder: ex. Emerald Craft
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description of your mod
+      description: What can EveryXDance mod do for your mod?
+      placeholder: If necessary, you can upload a screenshoot to make it clear.
+    validations:
+      required: true
