@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(HoglinModel.class)
-public class HoglinModelMixin<T extends Mob> implements IDanceableModel {
+public abstract class HoglinModelMixin<T extends Mob> implements IDanceableModel {
 	@Shadow @Final
 	private ModelPart head;
 	@Shadow @Final
@@ -29,21 +29,26 @@ public class HoglinModelMixin<T extends Mob> implements IDanceableModel {
 	@Shadow @Final
 	private ModelPart leftHindLeg;
 
-	@Unique
-	private Backup everyxdance$backup = Backup.empty();
+	@Shadow
+	protected abstract Iterable<ModelPart> headParts();
+	@Shadow
+	protected abstract Iterable<ModelPart> bodyParts();
+
 	@Unique
 	private boolean everyxdance$reset = true;
+	@Unique
+	private int everyxdance$index = 0;
 
 	@Inject(method = "setupAnim(Lnet/minecraft/world/entity/Mob;FFFFF)V", at = @At(value = "RETURN"))
 	private void everyxdance$setupAnimIfDancing(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
 		if(entity instanceof IDanceableEntity danceableEntity && danceableEntity.everyxdance$isDancing()) {
 			if(this.everyxdance$reset) {
 				this.everyxdance$reset = false;
-				IDanceableModel.createBackup(this);
+				this.everyxdance$index = IDanceableModel.getDancePresetIndex(entity.level().getRandom());
 			}
-			IDanceableModel.performDance(IDanceableModel.getDancePresetIndex(entity.level().getRandom()), this, ageInTicks);
+			IDanceableModel.performDance(this, danceableEntity.everyxdance$getAnimationState(), ageInTicks);
 		} else if(!this.everyxdance$reset) {
-			IDanceableModel.reset(this);
+			this.everyxdance$reset();
 			this.everyxdance$reset = true;
 		}
 	}
@@ -78,11 +83,15 @@ public class HoglinModelMixin<T extends Mob> implements IDanceableModel {
 	}
 
 	@Override
-	public Backup everyxdance$getBackup() {
-		return this.everyxdance$backup;
+	public void everyxdance$reset() {
+		this.headParts().forEach(ModelPart::resetPose);
+		this.bodyParts().forEach(ModelPart::resetPose);
 	}
 	@Override
-	public void everyxdance$setBackup(Backup backup) {
-		this.everyxdance$backup = backup;
+	public void everyxdance$prepareDance(Preset.Preparation preparation) {
+	}
+	@Override
+	public int everyxdance$getDanceIndex() {
+		return this.everyxdance$index;
 	}
 }
