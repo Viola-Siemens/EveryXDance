@@ -41,17 +41,17 @@ public final class EveryXDanceAnimations {
 			))
 			.addAnimation(DanceAnimation.DancePart.BODY, rotation(
 					1.0F,
-					keySoft(0.0F, posVec(0.0F, 0.0F, 0.0F)),
-					keySoft(0.25F, posVec(0.0F, 0.0F, 3.0F)),
-					keySoft(0.5F, posVec(0.0F, 0.0F, 0.0F)),
-					keySoft(0.75F, posVec(0.0F, 0.0F, -3.0F))
+					keySoft(0.0F, degreeVec(0.0F, 0.0F, 0.0F)),
+					keySoft(0.25F, degreeVec(0.0F, 0.0F, 3.0F)),
+					keySoft(0.5F, degreeVec(0.0F, 0.0F, 0.0F)),
+					keySoft(0.75F, degreeVec(0.0F, 0.0F, -3.0F))
 			))
 			.addAnimation(DanceAnimation.DancePart.NOSE, rotation(
 					1.0F,
-					keySoft(0.0F, posVec(0.0F, 0.0F, 0.0F)),
-					keySoft(0.25F, posVec(0.0F, 0.0F, 10.0F)),
-					keySoft(0.5F, posVec(0.0F, 0.0F, 0.0F)),
-					keySoft(0.75F, posVec(0.0F, 0.0F, -10.0F))
+					keySoft(0.0F, degreeVec(0.0F, 0.0F, 0.0F)),
+					keySoft(0.25F, degreeVec(0.0F, 0.0F, 10.0F)),
+					keySoft(0.5F, degreeVec(0.0F, 0.0F, 0.0F)),
+					keySoft(0.75F, degreeVec(0.0F, 0.0F, -10.0F))
 			))
 			.addAnimation(DanceAnimation.DancePart.RIGHT_ARM, position(
 					0.5F,
@@ -62,10 +62,10 @@ public final class EveryXDanceAnimations {
 			))
 			.addAnimation(DanceAnimation.DancePart.RIGHT_ARM, rotation(
 					0.5F,
-					keySoft(0.0F, posVec(0.0F, 0.0F, 80.0F)),
-					keySoft(0.125F, posVec(0.0F, 0.0F, 70.0F)),
-					keySoft(0.25F, posVec(0.0F, 0.0F, 60.0F)),
-					keySoft(0.375F, posVec(0.0F, 0.0F, 70.0F))
+					keySoft(0.0F, degreeVec(0.0F, 0.0F, 80.0F)),
+					keySoft(0.125F, degreeVec(0.0F, 0.0F, 70.0F)),
+					keySoft(0.25F, degreeVec(0.0F, 0.0F, 60.0F)),
+					keySoft(0.375F, degreeVec(0.0F, 0.0F, 70.0F))
 			))
 			.addAnimation(DanceAnimation.DancePart.LEFT_ARM, position(
 					0.5F,
@@ -76,24 +76,24 @@ public final class EveryXDanceAnimations {
 			))
 			.addAnimation(DanceAnimation.DancePart.LEFT_ARM, rotation(
 					0.5F,
-					keySoft(0.0F, posVec(0.0F, 0.0F, -80.0F)),
-					keySoft(0.125F, posVec(0.0F, 0.0F, -70.0F)),
-					keySoft(0.25F, posVec(0.0F, 0.0F, -60.0F)),
-					keySoft(0.375F, posVec(0.0F, 0.0F, -70.0F))
+					keySoft(0.0F, degreeVec(0.0F, 0.0F, -80.0F)),
+					keySoft(0.125F, degreeVec(0.0F, 0.0F, -70.0F)),
+					keySoft(0.25F, degreeVec(0.0F, 0.0F, -60.0F)),
+					keySoft(0.375F, degreeVec(0.0F, 0.0F, -70.0F))
 			))
 			.addAnimation(DanceAnimation.DancePart.RIGHT_LEG, rotation(
 					0.5F,
-					keySoft(0.0F, posVec(0.0F, 0.0F, 5.0F)),
-					keySoft(0.125F, posVec(0.0F, 0.0F, 0.0F)),
-					keySoft(0.25F, posVec(0.0F, 0.0F, -5.0F)),
-					keySoft(0.375F, posVec(0.0F, 0.0F, 0.0F))
+					keySoft(0.0F, degreeVec(0.0F, 0.0F, 5.0F)),
+					keySoft(0.125F, degreeVec(0.0F, 0.0F, 0.0F)),
+					keySoft(0.25F, degreeVec(0.0F, 0.0F, -5.0F)),
+					keySoft(0.375F, degreeVec(0.0F, 0.0F, 0.0F))
 			))
 			.addAnimation(DanceAnimation.DancePart.LEFT_LEG, rotation(
 					0.5F,
-					keySoft(0.0F, posVec(0.0F, 0.0F, 5.0F)),
-					keySoft(0.125F, posVec(0.0F, 0.0F, 0.0F)),
-					keySoft(0.25F, posVec(0.0F, 0.0F, -5.0F)),
-					keySoft(0.375F, posVec(0.0F, 0.0F, 0.0F))
+					keySoft(0.0F, degreeVec(0.0F, 0.0F, 5.0F)),
+					keySoft(0.125F, degreeVec(0.0F, 0.0F, 0.0F)),
+					keySoft(0.25F, degreeVec(0.0F, 0.0F, -5.0F)),
+					keySoft(0.375F, degreeVec(0.0F, 0.0F, 0.0F))
 			))
 			.build();
 
@@ -112,12 +112,13 @@ public final class EveryXDanceAnimations {
 					Keyframe[] frames = keyframes.frames();
 					int i = Math.max(0, Mth.binarySearch(0, frames.length, ind -> currentTimeStamp <= frames[ind].timestamp()) - 1);
 					Keyframe currentFrame = frames[i];
-					float nextTimeStamp = 0.0F;
+					float nextTimeStamp;
 					int j;
 					if(i + 1 >= frames.length) {
 						nextTimeStamp = keyframes.lengthInSeconds();
 						j = 0;
 					} else {
+						nextTimeStamp = 0.0F;
 						j = i + 1;
 					}
 					Keyframe nextFrame = frames[j];
@@ -168,12 +169,15 @@ public final class EveryXDanceAnimations {
 		return new DanceAnimationChannel(Targets.SCALE, new DanceAnimationChannel.Keyframes(lengthInSeconds, keyframes));
 	}
 
+	@SuppressWarnings("SameParameterValue")
 	static Vector3f posVec(float x, float y, float z) {
 		return new Vector3f(x, -y, z);
 	}
+	@SuppressWarnings("SameParameterValue")
 	static Vector3f degreeVec(float xRot, float yRot, float p_254397_) {
 		return new Vector3f(xRot * Mth.DEG_TO_RAD, yRot * Mth.DEG_TO_RAD, p_254397_ * Mth.DEG_TO_RAD);
 	}
+	@SuppressWarnings("SameParameterValue")
 	static Vector3f scaleVec(float xScale, float yScale, float zScale) {
 		return new Vector3f(xScale - 1.0F, yScale - 1.0F, zScale - 1.0F);
 	}

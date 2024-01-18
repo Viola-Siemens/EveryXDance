@@ -91,7 +91,7 @@ public abstract class MobEntityMixin extends LivingEntity implements IDanceableE
 	public void onSyncedDataUpdated(EntityDataAccessor<?> entityDataAccessor) {
 		if(entityDataAccessor.equals(Data.DATA_DANCE_TICK)) {
 			if(this.everyxdance$isDancing()) {
-				this.everyXDance$danceAnimationState.start(this.tickCount);
+				this.everyXDance$danceAnimationState.startIfStopped(this.tickCount);
 			} else {
 				this.everyXDance$danceAnimationState.stop();
 			}
