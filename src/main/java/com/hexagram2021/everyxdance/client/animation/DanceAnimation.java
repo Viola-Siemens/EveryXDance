@@ -1,12 +1,12 @@
 package com.hexagram2021.everyxdance.client.animation;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IExtensibleEnum;
-import org.apache.commons.compress.utils.Lists;
 
 import java.util.List;
 import java.util.Map;

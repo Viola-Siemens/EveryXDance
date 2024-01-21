@@ -3,5 +3,6 @@
   "language.code": "en_us",
   "language.region": "United States",
 
-  "jade.everyxdance.remaining.time": "Dancing time: %s"
+  "jade.everyxdance.remaining.time": "Dancing time: %s",
+  "config.jade.plugin_everyxdance.mob_dancing": "Mob Dancing"
 }

@@ -3,5 +3,6 @@
   "language.code": "zh_cn",
   "language.region": "China",
 
-  "jade.everyxdance.remaining.time": "跳舞时间：%s"
+  "jade.everyxdance.remaining.time": "跳舞时间：%s",
+  "config.jade.plugin_everyxdance.mob_dancing": "生物跳舞"
 }

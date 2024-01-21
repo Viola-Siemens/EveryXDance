@@ -1,11 +1,11 @@
 package com.hexagram2021.everyxdance.client.event;
 
+import com.google.common.collect.Lists;
 import com.hexagram2021.everyxdance.client.animation.DanceAnimation;
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.event.IModBusEvent;
-import org.apache.commons.compress.utils.Lists;
 
 import java.util.List;
 
