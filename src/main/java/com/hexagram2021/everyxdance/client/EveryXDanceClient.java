@@ -21,13 +21,17 @@ public class EveryXDanceClient {
 		IDanceableModel.PRESETS.clear();
 		IDanceableModel.PRESETS.addAll(collectDancePresetEvent.getPresets());
 		IDanceableModel.PRESETS.sort(IDanceableModel.Preset::compareTo);
-		EveryXDanceLogger.info("Dancing Animations (size %d):".formatted(IDanceableModel.PRESETS.size()));
-		for(int i = 0; i < IDanceableModel.PRESETS.size(); ++i) {
-			EveryXDanceLogger.info("(%d) - %s".formatted(i, IDanceableModel.PRESETS.get(i).name()));
-		}
+		printPresets();
 	}
 	@SubscribeEvent
 	public static void onCollectDancePreset(CollectDancePresetEvent event) {
 		event.register(new ResourceLocation(MODID, "piglin_dance"), IDanceableModel.Preset.Preparation.HUMANOID_STAND, PIGLIN_DANCE);
+	}
+
+	public static void printPresets() {
+		EveryXDanceLogger.info("Dancing Animations (size %d):".formatted(IDanceableModel.PRESETS.size()));
+		for(int i = 0; i < IDanceableModel.PRESETS.size(); ++i) {
+			EveryXDanceLogger.info("(%d) - %s".formatted(i, IDanceableModel.PRESETS.get(i).name()));
+		}
 	}
 }

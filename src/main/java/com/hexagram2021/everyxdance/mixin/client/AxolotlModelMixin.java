@@ -1,10 +1,14 @@
 package com.hexagram2021.everyxdance.mixin.client;
 
+import com.hexagram2021.everyxdance.client.animation.AnimatedModelPart;
+import com.hexagram2021.everyxdance.client.event.CustomPrepareDanceEvent;
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
 import net.minecraft.client.model.AxolotlModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
+import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -29,6 +33,8 @@ public abstract class AxolotlModelMixin<T extends Axolotl> implements IDanceable
 	private ModelPart leftHindLeg;
 	@Shadow @Final
 	private ModelPart topGills;
+	@Shadow @Final
+	private ModelPart tail;
 
 	@Shadow
 	protected abstract Iterable<ModelPart> headParts();
@@ -47,7 +53,7 @@ public abstract class AxolotlModelMixin<T extends Axolotl> implements IDanceable
 				this.everyxdance$reset = false;
 				this.everyxdance$index = IDanceableModel.getDancePresetIndex(entity.level().getRandom());
 			}
-			IDanceableModel.performDance(this, danceableEntity.everyxdance$getAnimationState(), ageInTicks);
+			IDanceableModel.performDance(this, entity.isBaby(), danceableEntity.everyxdance$getAnimationState(), entity.tickCount);
 		} else if(!this.everyxdance$reset) {
 			this.everyxdance$reset();
 			this.everyxdance$reset = true;
@@ -55,41 +61,60 @@ public abstract class AxolotlModelMixin<T extends Axolotl> implements IDanceable
 	}
 
 	@Override
-	public ModelPart everyxdance$getHead() {
-		return this.head;
+	public AnimatedModelPart everyxdance$getHead() {
+		return new AnimatedModelPart(this.head);
 	}
 	@Override
-	public ModelPart everyxdance$getBody() {
-		return this.body;
+	public AnimatedModelPart everyxdance$getBody() {
+		return new AnimatedModelPart(this.body);
 	}
 	@Override
-	public ModelPart everyxdance$getRightArm() {
-		return this.rightFrontLeg;
+	public AnimatedModelPart everyxdance$getRightArm() {
+		return new AnimatedModelPart(this.rightFrontLeg);
 	}
 	@Override
-	public ModelPart everyxdance$getLeftArm() {
-		return this.leftFrontLeg;
+	public AnimatedModelPart everyxdance$getLeftArm() {
+		return new AnimatedModelPart(this.leftFrontLeg);
 	}
 	@Override
-	public ModelPart everyxdance$getRightLeg() {
-		return this.rightHindLeg;
+	public AnimatedModelPart everyxdance$getRightLeg() {
+		return new AnimatedModelPart(this.rightHindLeg);
 	}
 	@Override
-	public ModelPart everyxdance$getLeftLeg() {
-		return this.leftHindLeg;
+	public AnimatedModelPart everyxdance$getLeftLeg() {
+		return new AnimatedModelPart(this.leftHindLeg);
 	}
 	@Override
-	public ModelPart everyxdance$getNose() {
-		return this.topGills;
+	public AnimatedModelPart everyxdance$getNose() {
+		return new AnimatedModelPart(this.topGills);
 	}
 
 	@Override
 	public void everyxdance$reset() {
 		this.headParts().forEach(ModelPart::resetPose);
+		this.everyxdance$getHead().resetPose();
+		this.everyxdance$getNose().resetPose();
 		this.bodyParts().forEach(ModelPart::resetPose);
+		this.everyxdance$getRightArm().resetPose();
+		this.everyxdance$getLeftArm().resetPose();
+		this.everyxdance$getRightLeg().resetPose();
+		this.everyxdance$getNose().resetPose();
 	}
 	@Override
-	public void everyxdance$prepareDance(Preset.Preparation preparation) {
+	public void everyxdance$prepareDance(Preset.Preparation preparation, boolean isBaby) {
+		switch (preparation) {
+			case HUMANOID_STAND -> {
+				this.body.xRot = -Mth.HALF_PI;
+				this.head.xRot = this.tail.xRot = Mth.HALF_PI;
+				this.leftFrontLeg.xRot = this.rightFrontLeg.xRot = -Mth.HALF_PI;
+				this.leftFrontLeg.zRot = this.rightFrontLeg.zRot = Mth.PI;
+				this.leftHindLeg.xRot = this.rightHindLeg.xRot = Mth.HALF_PI;
+				this.leftHindLeg.yRot = this.rightHindLeg.yRot = 0.0F;
+				this.leftHindLeg.zRot = this.rightHindLeg.zRot = 0.0F;
+				this.body.y = 20.0F;
+			}
+			default -> MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
+		}
 	}
 	@Override
 	public int everyxdance$getDanceIndex() {

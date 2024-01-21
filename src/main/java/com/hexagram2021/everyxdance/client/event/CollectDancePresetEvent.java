@@ -9,6 +9,14 @@ import org.apache.commons.compress.utils.Lists;
 
 import java.util.List;
 
+/**
+ * Fired in client side, mod bus.
+ * <br/>
+ * You can create dance preset when subscribing this event, and also create dance preparation there.
+ *
+ * @see com.hexagram2021.everyxdance.client.model.IDanceableModel.Preset
+ * @see com.hexagram2021.everyxdance.client.model.IDanceableModel.Preset.Preparation#create(String)
+ */
 public class CollectDancePresetEvent extends Event implements IModBusEvent {
 
 	protected final List<IDanceableModel.Preset> presets = Lists.newArrayList();

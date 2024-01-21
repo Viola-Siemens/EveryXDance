@@ -1,5 +1,6 @@
 package com.hexagram2021.everyxdance.mixin.client;
 
+import com.hexagram2021.everyxdance.client.animation.AnimatedModelPart;
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
 import net.minecraft.client.model.RabbitModel;
@@ -13,14 +14,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import javax.annotation.Nullable;
-
 @Mixin(RabbitModel.class)
 public class RabbitModelMixin<T extends Rabbit> implements IDanceableModel {
 	@Shadow @Final
 	private ModelPart head;
 	@Shadow @Final
 	private ModelPart body;
+	@Shadow @Final
+	private ModelPart rightEar;
+	@Shadow @Final
+	private ModelPart leftEar;
 	@Shadow @Final
 	private ModelPart rightFrontLeg;
 	@Shadow @Final
@@ -40,7 +43,7 @@ public class RabbitModelMixin<T extends Rabbit> implements IDanceableModel {
 				this.everyxdance$reset = false;
 				this.everyxdance$index = IDanceableModel.getDancePresetIndex(entity.level().getRandom());
 			}
-			IDanceableModel.performDance(this, danceableEntity.everyxdance$getAnimationState(), ageInTicks);
+			IDanceableModel.performDance(this, entity.isBaby(), danceableEntity.everyxdance$getAnimationState(), entity.tickCount);
 		} else if(!this.everyxdance$reset) {
 			this.everyxdance$reset();
 			this.everyxdance$reset = true;
@@ -48,44 +51,46 @@ public class RabbitModelMixin<T extends Rabbit> implements IDanceableModel {
 	}
 
 	@Override
-	public ModelPart everyxdance$getHead() {
-		return this.head;
+	public AnimatedModelPart everyxdance$getHead() {
+		return new AnimatedModelPart(this.head, this.nose, this.rightEar, this.leftEar);
 	}
 	@Override
-	public ModelPart everyxdance$getBody() {
-		return this.body;
+	public AnimatedModelPart everyxdance$getBody() {
+		return new AnimatedModelPart(this.body);
 	}
 	@Override
-	public ModelPart everyxdance$getRightArm() {
-		return this.rightFrontLeg;
+	public AnimatedModelPart everyxdance$getRightArm() {
+		return new AnimatedModelPart(this.rightFrontLeg);
 	}
 	@Override
-	public ModelPart everyxdance$getLeftArm() {
-		return this.leftFrontLeg;
-	}
-	@Override @Nullable
-	public ModelPart everyxdance$getRightLeg() {
-		return null;
-	}
-	@Override @Nullable
-	public ModelPart everyxdance$getLeftLeg() {
-		return null;
+	public AnimatedModelPart everyxdance$getLeftArm() {
+		return new AnimatedModelPart(this.leftFrontLeg);
 	}
 	@Override
-	public ModelPart everyxdance$getNose() {
-		return this.nose;
+	public AnimatedModelPart everyxdance$getRightLeg() {
+		return new AnimatedModelPart();
+	}
+	@Override
+	public AnimatedModelPart everyxdance$getLeftLeg() {
+		return new AnimatedModelPart();
+	}
+	@Override
+	public AnimatedModelPart everyxdance$getNose() {
+		return new AnimatedModelPart(this.nose);
 	}
 
 	@Override
 	public void everyxdance$reset() {
 		this.head.getAllParts().forEach(ModelPart::resetPose);
+		this.rightEar.getAllParts().forEach(ModelPart::resetPose);
+		this.leftEar.getAllParts().forEach(ModelPart::resetPose);
 		this.body.getAllParts().forEach(ModelPart::resetPose);
 		this.rightFrontLeg.getAllParts().forEach(ModelPart::resetPose);
 		this.leftFrontLeg.getAllParts().forEach(ModelPart::resetPose);
 		this.nose.getAllParts().forEach(ModelPart::resetPose);
 	}
 	@Override
-	public void everyxdance$prepareDance(Preset.Preparation preparation) {
+	public void everyxdance$prepareDance(Preset.Preparation preparation, boolean isBaby) {
 	}
 	@Override
 	public int everyxdance$getDanceIndex() {

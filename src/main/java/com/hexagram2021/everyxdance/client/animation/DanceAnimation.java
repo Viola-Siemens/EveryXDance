@@ -8,7 +8,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IExtensibleEnum;
 import org.apache.commons.compress.utils.Lists;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -25,14 +24,13 @@ public record DanceAnimation(float lengthInSeconds, Map<DancePart, List<DanceAni
 		LEFT_LEG(IDanceableModel::everyxdance$getLeftLeg),
 		RIGHT_LEG(IDanceableModel::everyxdance$getRightLeg);
 
-		private final Function<IDanceableModel, ModelPart> partGetter;
+		private final Function<IDanceableModel, AnimatedModelPart> partGetter;
 
-		DancePart(Function<IDanceableModel, ModelPart> partGetter) {
+		DancePart(Function<IDanceableModel, AnimatedModelPart> partGetter) {
 			this.partGetter = partGetter;
 		}
 
-		@Nullable
-		public ModelPart getPart(IDanceableModel model) {
+		public AnimatedModelPart getPart(IDanceableModel model) {
 			return this.partGetter.apply(model);
 		}
 

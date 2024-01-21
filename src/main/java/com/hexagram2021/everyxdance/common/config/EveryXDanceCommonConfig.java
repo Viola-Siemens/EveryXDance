@@ -13,9 +13,10 @@ public final class EveryXDanceCommonConfig {
 	private static final ForgeConfigSpec SPEC;
 
 	public static final ForgeConfigSpec.IntValue MOB_DANCE_TOTAL_TICKS;
-	public static final ForgeConfigSpec.IntValue MOB_DANCE_POSSIBILITY;
+	public static final ForgeConfigSpec.IntValue MOB_DANCE_POSSIBILITY_ATTACK;
+	public static final ForgeConfigSpec.IntValue MOB_DANCE_POSSIBILITY_BREED;
 
-	public static final ForgeConfigSpec.IntValue MOB_DANCE_PRESET_INDEX;
+	public static final ForgeConfigSpec.ConfigValue<List<? extends String>> DISABLED_DANCE_PRESETS;
 
 	public static final ForgeConfigSpec.ConfigValue<List<? extends String>> DANCEABLE_MOB_TYPES;
 
@@ -25,8 +26,9 @@ public final class EveryXDanceCommonConfig {
 	static {
 		BUILDER.push("everyxdance-common-config");
 		MOB_DANCE_TOTAL_TICKS = BUILDER.comment("How many ticks (1 sec = 20 ticks) will a dance last.").defineInRange("MOB_DANCE_TOTAL_TICKS", 200, 20, 72000);
-		MOB_DANCE_POSSIBILITY = BUILDER.comment("How possible will a mob dance. 0: never, 100: always.").defineInRange("MOB_DANCE_POSSIBILITY", 25, 0, 100);
-		MOB_DANCE_PRESET_INDEX = BUILDER.comment("Dancing animation preset index (only works in client side). See client latest.log and search for \"Dancing Animations\" for getting all dancing animations.").defineInRange("MOB_DANCE_PRESET_INDEX", -1, -1, 65535);
+		MOB_DANCE_POSSIBILITY_ATTACK = BUILDER.comment("How possible will a mob dance after killing target or survive from attacking. 0: never, 100: always.").defineInRange("MOB_DANCE_POSSIBILITY_ATTACK", 25, 0, 100);
+		MOB_DANCE_POSSIBILITY_BREED = BUILDER.comment("How possible will a mob dance after breed. 0: never, 100: always.").defineInRange("MOB_DANCE_POSSIBILITY_BREED", 100, 0, 100);
+		DISABLED_DANCE_PRESETS = BUILDER.comment("Dance animations that won't show in your client (only works in client side). See client latest.log and search for \"Dancing Animations\" for getting all dancing animations.").defineListAllowEmpty("DISABLED_DANCE_PRESETS", List.of(), o -> o instanceof String);
 		DANCEABLE_MOB_TYPES = BUILDER.comment("Entity types for those who can dance (only works in server side). During their dance, they will not attack other entities.").defineList("DANCEABLE_MOB_TYPES", List.of(
 				getRegistryName(EntityType.AXOLOTL).toString(),
 				getRegistryName(EntityType.CAT).toString(),

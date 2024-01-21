@@ -5,6 +5,7 @@ import net.minecraft.world.entity.AnimationState;
 
 public interface IDanceableEntity {
 	boolean everyxdance$isDancing();
+	int everyxdance$getRemainingDanceTick();
 
 	//Make sure be called in server side.
 	void everyxdance$startDancing();

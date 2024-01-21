@@ -12,6 +12,7 @@
   "client": [
     "client.AxolotlModelMixin",
     "client.ChickenModelMixin",
+    "client.CowModelMixin",
     "client.FoxModelMixin",
     "client.HoglinModelMixin",
     "client.HorseModelMixin",
@@ -23,6 +24,8 @@
     "client.QuadrupedModelMixin",
     "client.RabbitModelMixin",
     "client.RavagerModelMixin",
+    "client.SheepFurModelMixin",
+    "client.SheepModelMixin",
     "client.SnowGolemModelMixin",
     "client.SpiderModelMixin",
     "client.VexModelMixin",

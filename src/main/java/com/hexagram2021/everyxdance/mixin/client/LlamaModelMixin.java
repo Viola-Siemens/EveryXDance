@@ -1,5 +1,6 @@
 package com.hexagram2021.everyxdance.mixin.client;
 
+import com.hexagram2021.everyxdance.client.animation.AnimatedModelPart;
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
 import net.minecraft.client.model.LlamaModel;
@@ -12,8 +13,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import javax.annotation.Nullable;
 
 @Mixin(LlamaModel.class)
 public class LlamaModelMixin<T extends AbstractChestedHorse> implements IDanceableModel {
@@ -42,7 +41,7 @@ public class LlamaModelMixin<T extends AbstractChestedHorse> implements IDanceab
 				this.everyxdance$reset = false;
 				this.everyxdance$index = IDanceableModel.getDancePresetIndex(entity.level().getRandom());
 			}
-			IDanceableModel.performDance(this, danceableEntity.everyxdance$getAnimationState(), ageInTicks);
+			IDanceableModel.performDance(this, entity.isBaby(), danceableEntity.everyxdance$getAnimationState(), entity.tickCount);
 		} else if(!this.everyxdance$reset) {
 			this.everyxdance$reset();
 			this.everyxdance$reset = true;
@@ -50,32 +49,32 @@ public class LlamaModelMixin<T extends AbstractChestedHorse> implements IDanceab
 	}
 
 	@Override
-	public ModelPart everyxdance$getHead() {
-		return this.head;
+	public AnimatedModelPart everyxdance$getHead() {
+		return new AnimatedModelPart(this.head);
 	}
 	@Override
-	public ModelPart everyxdance$getBody() {
-		return this.body;
+	public AnimatedModelPart everyxdance$getBody() {
+		return new AnimatedModelPart(this.body);
 	}
 	@Override
-	public ModelPart everyxdance$getRightArm() {
-		return this.rightFrontLeg;
+	public AnimatedModelPart everyxdance$getRightArm() {
+		return new AnimatedModelPart(this.rightFrontLeg);
 	}
 	@Override
-	public ModelPart everyxdance$getLeftArm() {
-		return this.leftFrontLeg;
+	public AnimatedModelPart everyxdance$getLeftArm() {
+		return new AnimatedModelPart(this.leftFrontLeg);
 	}
 	@Override
-	public ModelPart everyxdance$getRightLeg() {
-		return this.rightHindLeg;
+	public AnimatedModelPart everyxdance$getRightLeg() {
+		return new AnimatedModelPart(this.rightHindLeg);
 	}
 	@Override
-	public ModelPart everyxdance$getLeftLeg() {
-		return this.leftHindLeg;
+	public AnimatedModelPart everyxdance$getLeftLeg() {
+		return new AnimatedModelPart(this.leftHindLeg);
 	}
-	@Override @Nullable
-	public ModelPart everyxdance$getNose() {
-		return null;
+	@Override
+	public AnimatedModelPart everyxdance$getNose() {
+		return new AnimatedModelPart();
 	}
 
 	@Override
@@ -88,7 +87,8 @@ public class LlamaModelMixin<T extends AbstractChestedHorse> implements IDanceab
 		this.leftHindLeg.getAllParts().forEach(ModelPart::resetPose);
 	}
 	@Override
-	public void everyxdance$prepareDance(Preset.Preparation preparation) {
+	public void everyxdance$prepareDance(Preset.Preparation preparation, boolean isBaby) {
+		//TODO
 	}
 	@Override
 	public int everyxdance$getDanceIndex() {

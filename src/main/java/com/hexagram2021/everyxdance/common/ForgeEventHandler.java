@@ -13,7 +13,7 @@ import static com.hexagram2021.everyxdance.EveryXDance.MODID;
 public final class ForgeEventHandler {
 	@SubscribeEvent
 	public static void onAnimalBreed(BabyEntitySpawnEvent event) {
-		if(RandomSource.create(event.getParentA().level().getGameTime()).nextInt(100) < EveryXDanceCommonConfig.MOB_DANCE_POSSIBILITY.get()) {
+		if(RandomSource.create(event.getParentA().level().getGameTime()).nextInt(100) < EveryXDanceCommonConfig.MOB_DANCE_POSSIBILITY_BREED.get()) {
 			if(event.getParentA() instanceof IDanceableEntity danceableEntity) {
 				danceableEntity.everyxdance$startDancing();
 			}

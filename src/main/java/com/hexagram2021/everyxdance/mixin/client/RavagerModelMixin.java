@@ -1,11 +1,11 @@
 package com.hexagram2021.everyxdance.mixin.client;
 
+import com.hexagram2021.everyxdance.client.animation.AnimatedModelPart;
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
 import net.minecraft.client.model.RavagerModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.monster.Ravager;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -44,7 +44,7 @@ public abstract class RavagerModelMixin implements IDanceableModel {
 				this.everyxdance$reset = false;
 				this.everyxdance$index = IDanceableModel.getDancePresetIndex(entity.level().getRandom());
 			}
-			IDanceableModel.performDance(this, danceableEntity.everyxdance$getAnimationState(), ageInTicks);
+			IDanceableModel.performDance(this, entity.isBaby(), danceableEntity.everyxdance$getAnimationState(), entity.tickCount);
 		} else if(!this.everyxdance$reset) {
 			this.everyxdance$reset();
 			this.everyxdance$reset = true;
@@ -52,32 +52,32 @@ public abstract class RavagerModelMixin implements IDanceableModel {
 	}
 
 	@Override
-	public ModelPart everyxdance$getHead() {
-		return this.head;
+	public AnimatedModelPart everyxdance$getHead() {
+		return new AnimatedModelPart(this.head);
 	}
 	@Override
-	public ModelPart everyxdance$getBody() {
-		return this.root.getChild("body");
+	public AnimatedModelPart everyxdance$getBody() {
+		return new AnimatedModelPart(this.root.getChild("body"));
 	}
 	@Override
-	public ModelPart everyxdance$getRightArm() {
-		return this.rightFrontLeg;
+	public AnimatedModelPart everyxdance$getRightArm() {
+		return new AnimatedModelPart(this.rightFrontLeg);
 	}
 	@Override
-	public ModelPart everyxdance$getLeftArm() {
-		return this.leftFrontLeg;
+	public AnimatedModelPart everyxdance$getLeftArm() {
+		return new AnimatedModelPart(this.leftFrontLeg);
 	}
 	@Override
-	public ModelPart everyxdance$getRightLeg() {
-		return this.rightHindLeg;
+	public AnimatedModelPart everyxdance$getRightLeg() {
+		return new AnimatedModelPart(this.rightHindLeg);
 	}
 	@Override
-	public ModelPart everyxdance$getLeftLeg() {
-		return this.leftHindLeg;
+	public AnimatedModelPart everyxdance$getLeftLeg() {
+		return new AnimatedModelPart(this.leftHindLeg);
 	}
-	@Override @Nullable
-	public ModelPart everyxdance$getNose() {
-		return null;
+	@Override
+	public AnimatedModelPart everyxdance$getNose() {
+		return new AnimatedModelPart();
 	}
 
 	@Override
@@ -85,7 +85,8 @@ public abstract class RavagerModelMixin implements IDanceableModel {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 	}
 	@Override
-	public void everyxdance$prepareDance(Preset.Preparation preparation) {
+	public void everyxdance$prepareDance(Preset.Preparation preparation, boolean isBaby) {
+		//TODO
 	}
 	@Override
 	public int everyxdance$getDanceIndex() {

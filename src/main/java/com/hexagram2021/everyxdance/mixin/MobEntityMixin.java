@@ -66,7 +66,7 @@ public abstract class MobEntityMixin extends LivingEntity implements IDanceableE
 			target = current.getTarget();
 		}
 		if(target != null && target.isDeadOrDying() && EveryXDanceCommonConfig.DANCEABLE_MOB_TYPES.get().contains(getRegistryName(current.getType()).toString()) &&
-				RandomSource.create(current.level().getGameTime()).nextInt(100) < EveryXDanceCommonConfig.MOB_DANCE_POSSIBILITY.get()) {
+				RandomSource.create(current.level().getGameTime()).nextInt(100) < EveryXDanceCommonConfig.MOB_DANCE_POSSIBILITY_ATTACK.get()) {
 			this.everyxdance$startDancing();
 		}
 	}
@@ -100,8 +100,8 @@ public abstract class MobEntityMixin extends LivingEntity implements IDanceableE
 		super.onSyncedDataUpdated(entityDataAccessor);
 	}
 
-	@Unique
-	private int everyxdance$getRemainingDanceTick() {
+	@Override
+	public int everyxdance$getRemainingDanceTick() {
 		return this.getEntityData().get(Data.DATA_DANCE_TICK);
 	}
 	@Unique

@@ -1,5 +1,6 @@
 package com.hexagram2021.everyxdance.mixin.client;
 
+import com.hexagram2021.everyxdance.client.animation.AnimatedModelPart;
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
 import net.minecraft.client.model.IllagerModel;
@@ -12,8 +13,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import javax.annotation.Nullable;
 
 @Mixin(IllagerModel.class)
 public abstract class IllagerModelMixin<T extends AbstractIllager> implements IDanceableModel {
@@ -49,7 +48,7 @@ public abstract class IllagerModelMixin<T extends AbstractIllager> implements ID
 			}
 			this.arms.visible = false;
 			this.leftArm.visible = this.rightArm.visible = true;
-			IDanceableModel.performDance(this, danceableEntity.everyxdance$getAnimationState(), ageInTicks);
+			IDanceableModel.performDance(this, entity.isBaby(), danceableEntity.everyxdance$getAnimationState(), entity.tickCount);
 		} else if(!this.everyxdance$reset) {
 			this.everyxdance$reset();
 			this.everyxdance$reset = true;
@@ -57,32 +56,32 @@ public abstract class IllagerModelMixin<T extends AbstractIllager> implements ID
 	}
 
 	@Override
-	public ModelPart everyxdance$getHead() {
-		return this.head;
+	public AnimatedModelPart everyxdance$getHead() {
+		return new AnimatedModelPart(this.head);
 	}
 	@Override
-	public ModelPart everyxdance$getBody() {
-		return this.root.getChild("body");
-	}
-	@Override @Nullable
-	public ModelPart everyxdance$getRightArm() {
-		return this.rightArm;
-	}
-	@Override @Nullable
-	public ModelPart everyxdance$getLeftArm() {
-		return this.leftArm;
+	public AnimatedModelPart everyxdance$getBody() {
+		return new AnimatedModelPart(this.root.getChild("body"));
 	}
 	@Override
-	public ModelPart everyxdance$getRightLeg() {
-		return this.rightLeg;
+	public AnimatedModelPart everyxdance$getRightArm() {
+		return new AnimatedModelPart(this.rightArm);
 	}
 	@Override
-	public ModelPart everyxdance$getLeftLeg() {
-		return this.leftLeg;
+	public AnimatedModelPart everyxdance$getLeftArm() {
+		return new AnimatedModelPart(this.leftArm);
 	}
 	@Override
-	public ModelPart everyxdance$getNose() {
-		return this.head.getChild("nose");
+	public AnimatedModelPart everyxdance$getRightLeg() {
+		return new AnimatedModelPart(this.rightLeg);
+	}
+	@Override
+	public AnimatedModelPart everyxdance$getLeftLeg() {
+		return new AnimatedModelPart(this.leftLeg);
+	}
+	@Override
+	public AnimatedModelPart everyxdance$getNose() {
+		return new AnimatedModelPart(this.head.getChild("nose"));
 	}
 
 	@Override
@@ -90,7 +89,7 @@ public abstract class IllagerModelMixin<T extends AbstractIllager> implements ID
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 	}
 	@Override
-	public void everyxdance$prepareDance(Preset.Preparation preparation) {
+	public void everyxdance$prepareDance(Preset.Preparation preparation, boolean isBaby) {
 	}
 	@Override
 	public int everyxdance$getDanceIndex() {

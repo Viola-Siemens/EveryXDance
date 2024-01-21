@@ -1,10 +1,12 @@
 package com.hexagram2021.everyxdance.mixin.client;
 
+import com.hexagram2021.everyxdance.client.animation.AnimatedModelPart;
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
 import net.minecraft.client.model.VillagerModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -12,8 +14,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import javax.annotation.Nullable;
 
 @Mixin(VillagerModel.class)
 public abstract class VillagerModelMixin<T extends Entity> implements IDanceableModel {
@@ -43,7 +43,7 @@ public abstract class VillagerModelMixin<T extends Entity> implements IDanceable
 				this.everyxdance$reset = false;
 				this.everyxdance$index = IDanceableModel.getDancePresetIndex(entity.level().getRandom());
 			}
-			IDanceableModel.performDance(this, danceableEntity.everyxdance$getAnimationState(), ageInTicks);
+			IDanceableModel.performDance(this, entity instanceof LivingEntity living && living.isBaby(), danceableEntity.everyxdance$getAnimationState(), entity.tickCount);
 		} else if(!this.everyxdance$reset) {
 			this.everyxdance$reset();
 			this.everyxdance$reset = true;
@@ -51,32 +51,32 @@ public abstract class VillagerModelMixin<T extends Entity> implements IDanceable
 	}
 
 	@Override
-	public ModelPart everyxdance$getHead() {
-		return this.head;
+	public AnimatedModelPart everyxdance$getHead() {
+		return new AnimatedModelPart(this.head);
 	}
 	@Override
-	public ModelPart everyxdance$getBody() {
-		return this.root.getChild("body");
-	}
-	@Override @Nullable
-	public ModelPart everyxdance$getRightArm() {
-		return null;
-	}
-	@Override @Nullable
-	public ModelPart everyxdance$getLeftArm() {
-		return null;
+	public AnimatedModelPart everyxdance$getBody() {
+		return new AnimatedModelPart(this.root.getChild("body"));
 	}
 	@Override
-	public ModelPart everyxdance$getRightLeg() {
-		return this.rightLeg;
+	public AnimatedModelPart everyxdance$getRightArm() {
+		return new AnimatedModelPart();
 	}
 	@Override
-	public ModelPart everyxdance$getLeftLeg() {
-		return this.leftLeg;
+	public AnimatedModelPart everyxdance$getLeftArm() {
+		return new AnimatedModelPart();
 	}
 	@Override
-	public ModelPart everyxdance$getNose() {
-		return this.nose;
+	public AnimatedModelPart everyxdance$getRightLeg() {
+		return new AnimatedModelPart(this.rightLeg);
+	}
+	@Override
+	public AnimatedModelPart everyxdance$getLeftLeg() {
+		return new AnimatedModelPart(this.leftLeg);
+	}
+	@Override
+	public AnimatedModelPart everyxdance$getNose() {
+		return new AnimatedModelPart(this.nose);
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public abstract class VillagerModelMixin<T extends Entity> implements IDanceable
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 	}
 	@Override
-	public void everyxdance$prepareDance(Preset.Preparation preparation) {
+	public void everyxdance$prepareDance(Preset.Preparation preparation, boolean isBaby) {
 	}
 	@Override
 	public int everyxdance$getDanceIndex() {
