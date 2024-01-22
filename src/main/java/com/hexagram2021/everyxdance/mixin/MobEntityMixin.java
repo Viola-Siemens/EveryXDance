@@ -1,5 +1,6 @@
 package com.hexagram2021.everyxdance.mixin;
 
+import com.hexagram2021.everyxdance.client.EveryXDanceClient;
 import com.hexagram2021.everyxdance.common.config.EveryXDanceCommonConfig;
 import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
 import net.minecraft.nbt.CompoundTag;
@@ -25,6 +26,10 @@ import static com.hexagram2021.everyxdance.common.util.RegistryHelper.getRegistr
 public abstract class MobEntityMixin extends LivingEntity implements IDanceableEntity {
 	@Unique
 	private final AnimationState everyXDance$danceAnimationState = new AnimationState();
+	@Unique
+	private int everyXDance$danceRemainingTicks = 0;
+	@Unique
+	private int everyxdance$index = -1;
 
 	protected MobEntityMixin(EntityType<? extends LivingEntity> entityType, Level level) {
 		super(entityType, level);
@@ -33,12 +38,12 @@ public abstract class MobEntityMixin extends LivingEntity implements IDanceableE
 	@SuppressWarnings("WrongEntityDataParameterClass")
 	@Inject(method = "<clinit>", at = @At(value = "TAIL"))
 	private static void everyxdance$defineEntityDataAccessor(CallbackInfo ci) {
-		Data.DATA_DANCE_TICK = SynchedEntityData.defineId(Mob.class, EntityDataSerializers.INT);
+		Data.DATA_IS_DANCE = SynchedEntityData.defineId(Mob.class, EntityDataSerializers.BOOLEAN);
 	}
 
 	@Inject(method = "defineSynchedData", at = @At(value = "TAIL"))
 	private void everyxdance$defineDanceData(CallbackInfo ci) {
-		this.getEntityData().define(Data.DATA_DANCE_TICK, 0);
+		this.getEntityData().define(Data.DATA_IS_DANCE, false);
 	}
 
 	@Unique
@@ -73,7 +78,7 @@ public abstract class MobEntityMixin extends LivingEntity implements IDanceableE
 
 	@Override
 	public boolean everyxdance$isDancing() {
-		return this.everyxdance$getRemainingDanceTick() > 0;
+		return this.getEntityData().get(Data.DATA_IS_DANCE);
 	}
 	@Override
 	public void everyxdance$startDancing() {
@@ -88,11 +93,24 @@ public abstract class MobEntityMixin extends LivingEntity implements IDanceableE
 		return this.everyXDance$danceAnimationState;
 	}
 	@Override
+	public int everyxdance$getDanceIndex() {
+		return this.everyxdance$index;
+	}
+	@Override
+	public void everyxdance$setDanceIndex(int index) {
+		this.everyxdance$index = index;
+	}
+
+	@Override
 	public void onSyncedDataUpdated(EntityDataAccessor<?> entityDataAccessor) {
-		if(entityDataAccessor.equals(Data.DATA_DANCE_TICK)) {
+		if(entityDataAccessor.equals(Data.DATA_IS_DANCE)) {
 			if(this.everyxdance$isDancing()) {
+				if(this.everyxdance$getDanceIndex() < 0 && this.level().isClientSide) {
+					this.everyxdance$setDanceIndex(EveryXDanceClient.getRandomDanceIndex(this.getRandom()));
+				}
 				this.everyXDance$danceAnimationState.startIfStopped(this.tickCount);
 			} else {
+				this.everyxdance$setDanceIndex(-1);
 				this.everyXDance$danceAnimationState.stop();
 			}
 		}
@@ -102,11 +120,12 @@ public abstract class MobEntityMixin extends LivingEntity implements IDanceableE
 
 	@Override
 	public int everyxdance$getRemainingDanceTick() {
-		return this.getEntityData().get(Data.DATA_DANCE_TICK);
+		return this.everyXDance$danceRemainingTicks;
 	}
 	@Unique
 	private void everyxdance$setRemainingDanceTick(int ticks) {
-		this.getEntityData().set(Data.DATA_DANCE_TICK, ticks);
+		this.everyXDance$danceRemainingTicks = ticks;
+		this.getEntityData().set(Data.DATA_IS_DANCE, ticks > 0);
 	}
 	@Unique
 	private int everyxdance$getDanceTotalTicks() {

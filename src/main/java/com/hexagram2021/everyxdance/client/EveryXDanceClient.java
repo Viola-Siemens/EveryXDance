@@ -4,13 +4,14 @@ import com.hexagram2021.everyxdance.client.event.CollectDancePresetEvent;
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.common.util.EveryXDanceLogger;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import static com.hexagram2021.everyxdance.EveryXDance.MODID;
-import static com.hexagram2021.everyxdance.client.animation.EveryXDanceAnimations.PIGLIN_DANCE;
+import static com.hexagram2021.everyxdance.client.animation.EveryXDanceAnimationPresets.*;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = MODID)
 public class EveryXDanceClient {
@@ -26,6 +27,7 @@ public class EveryXDanceClient {
 	@SubscribeEvent
 	public static void onCollectDancePreset(CollectDancePresetEvent event) {
 		event.register(new ResourceLocation(MODID, "piglin_dance"), IDanceableModel.Preset.Preparation.HUMANOID_STAND, PIGLIN_DANCE);
+		event.register(new ResourceLocation(MODID, "subject3"), IDanceableModel.Preset.Preparation.HUMANOID_STAND, SUBJECT3);
 	}
 
 	public static void printPresets() {
@@ -33,5 +35,9 @@ public class EveryXDanceClient {
 		for(int i = 0; i < IDanceableModel.PRESETS.size(); ++i) {
 			EveryXDanceLogger.info("(%d) - %s".formatted(i, IDanceableModel.PRESETS.get(i).name()));
 		}
+	}
+
+	public static int getRandomDanceIndex(RandomSource randomSource) {
+		return IDanceableModel.getDancePresetIndex(randomSource);
 	}
 }

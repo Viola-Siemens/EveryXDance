@@ -1,7 +1,7 @@
 package com.hexagram2021.everyxdance.client.event;
 
 import com.google.common.collect.Lists;
-import com.hexagram2021.everyxdance.client.animation.DanceAnimation;
+import com.hexagram2021.everyxdance.api.client.DanceAnimation;
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.Event;
@@ -16,6 +16,7 @@ import java.util.List;
  *
  * @see com.hexagram2021.everyxdance.client.model.IDanceableModel.Preset
  * @see com.hexagram2021.everyxdance.client.model.IDanceableModel.Preset.Preparation#create(String)
+ * @see com.hexagram2021.everyxdance.client.animation.EveryXDanceAnimationPresets
  */
 public class CollectDancePresetEvent extends Event implements IModBusEvent {
 

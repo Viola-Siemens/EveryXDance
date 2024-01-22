@@ -34,17 +34,14 @@ public abstract class WardenModelMixin<T extends Warden> implements IDanceableMo
 
 	@Unique
 	private boolean everyxdance$reset = true;
-	@Unique
-	private int everyxdance$index = 0;
 
 	@Inject(method = "setupAnim(Lnet/minecraft/world/entity/monster/warden/Warden;FFFFF)V", at = @At(value = "RETURN"))
 	private void everyxdance$setupAnimIfDancing(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
 		if(entity instanceof IDanceableEntity danceableEntity && danceableEntity.everyxdance$isDancing()) {
 			if(this.everyxdance$reset) {
 				this.everyxdance$reset = false;
-				this.everyxdance$index = IDanceableModel.getDancePresetIndex(entity.level().getRandom());
 			}
-			IDanceableModel.performDance(this, entity.isBaby(), danceableEntity.everyxdance$getAnimationState(), entity.tickCount);
+			IDanceableModel.performDance(this, entity.isBaby(), danceableEntity, entity.tickCount);
 		} else if(!this.everyxdance$reset) {
 			this.everyxdance$reset();
 			this.everyxdance$reset = true;
@@ -86,9 +83,5 @@ public abstract class WardenModelMixin<T extends Warden> implements IDanceableMo
 	}
 	@Override
 	public void everyxdance$prepareDance(Preset.Preparation preparation, boolean isBaby) {
-	}
-	@Override
-	public int everyxdance$getDanceIndex() {
-		return this.everyxdance$index;
 	}
 }

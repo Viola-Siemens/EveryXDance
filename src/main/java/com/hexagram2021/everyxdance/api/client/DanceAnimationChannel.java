@@ -1,4 +1,4 @@
-package com.hexagram2021.everyxdance.client.animation;
+package com.hexagram2021.everyxdance.api.client;
 
 import net.minecraft.client.animation.AnimationChannel;
 import net.minecraft.client.animation.Keyframe;
@@ -13,6 +13,10 @@ public record DanceAnimationChannel(AnimationChannel.Target target, Keyframes ke
 
 	@OnlyIn(Dist.CLIENT)
 	public static class Interpolations {
+		public static final AnimationChannel.Interpolation DISPERSED = (cache, rate, frames, left, right, speed) -> {
+			cache.set(frames[left].target());
+			return cache;
+		};
 		public static final AnimationChannel.Interpolation LINEAR = (cache, rate, frames, left, right, speed) -> {
 			Vector3f from = frames[left].target();
 			Vector3f to = frames[right].target();

@@ -25,7 +25,7 @@ public final class EveryXDanceCommonConfig {
 
 	static {
 		BUILDER.push("everyxdance-common-config");
-		MOB_DANCE_TOTAL_TICKS = BUILDER.comment("How many ticks (1 sec = 20 ticks) will a dance last.").defineInRange("MOB_DANCE_TOTAL_TICKS", 200, 20, 72000);
+		MOB_DANCE_TOTAL_TICKS = BUILDER.comment("How many ticks (1 sec = 20 ticks) will a dance last. It is recommended to be divisible by 40 or 80.").defineInRange("MOB_DANCE_TOTAL_TICKS", 320, 20, 72000);
 		MOB_DANCE_POSSIBILITY_ATTACK = BUILDER.comment("How possible will a mob dance after killing target or survive from attacking. 0: never, 100: always.").defineInRange("MOB_DANCE_POSSIBILITY_ATTACK", 25, 0, 100);
 		MOB_DANCE_POSSIBILITY_BREED = BUILDER.comment("How possible will a mob dance after breed. 0: never, 100: always.").defineInRange("MOB_DANCE_POSSIBILITY_BREED", 100, 0, 100);
 		DISABLED_DANCE_PRESETS = BUILDER.comment("Dance animations that won't show in your client (only works in client side). See client latest.log and search for \"Dancing Animations\" for getting all dancing animations.").defineListAllowEmpty("DISABLED_DANCE_PRESETS", List.of(), o -> o instanceof String);

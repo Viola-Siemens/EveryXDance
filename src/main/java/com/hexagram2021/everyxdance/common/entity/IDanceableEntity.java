@@ -12,11 +12,14 @@ public interface IDanceableEntity {
 	//Make sure be called in server side.
 	void everyxdance$stopDancing();
 
+	int everyxdance$getDanceIndex();
+	void everyxdance$setDanceIndex(int index);
+
 	AnimationState everyxdance$getAnimationState();
 
 
 	final class Data {
 		@SuppressWarnings("NotNullFieldNotInitialized")
-		public static EntityDataAccessor<Integer> DATA_DANCE_TICK;
+		public static EntityDataAccessor<Boolean> DATA_IS_DANCE;
 	}
 }

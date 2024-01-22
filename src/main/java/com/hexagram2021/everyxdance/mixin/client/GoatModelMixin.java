@@ -27,15 +27,13 @@ public abstract class GoatModelMixin<T extends Panda> extends QuadrupedModel<T> 
 	public AnimatedModelPart everyxdance$getNose() {
 		return new AnimatedModelPart(this.head.getChild("nose"));
 	}
-	private float HEAD_Y = 8.0F;
-	private float HEAD_Z = 10.0F;
 	@Override
 	public void everyxdance$prepareDance(Preset.Preparation preparation, boolean isBaby) {
 		switch (preparation) {
 			case HUMANOID_STAND -> {
 				this.body.xRot = -Mth.HALF_PI;
-				this.head.y = HEAD_Y;
-				this.head.z = HEAD_Z;
+				this.head.y = 8.0F;
+				this.head.z = 10.0F;
 				this.body.y = 9.5F;
 				this.body.z = -4.0F;
 				this.leftFrontLeg.y = 3.0F;

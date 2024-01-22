@@ -36,17 +36,14 @@ public abstract class IronGolemModelMixin<T extends IronGolem> implements IDance
 
 	@Unique
 	private boolean everyxdance$reset = true;
-	@Unique
-	private int everyxdance$index = 0;
 
 	@Inject(method = "setupAnim(Lnet/minecraft/world/entity/animal/IronGolem;FFFFF)V", at = @At(value = "RETURN"))
 	private void everyxdance$setupAnimIfDancing(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
 		if(entity instanceof IDanceableEntity danceableEntity && danceableEntity.everyxdance$isDancing()) {
 			if(this.everyxdance$reset) {
 				this.everyxdance$reset = false;
-				this.everyxdance$index = IDanceableModel.getDancePresetIndex(entity.level().getRandom());
 			}
-			IDanceableModel.performDance(this, entity.isBaby(), danceableEntity.everyxdance$getAnimationState(), entity.tickCount);
+			IDanceableModel.performDance(this, entity.isBaby(), danceableEntity, entity.tickCount);
 		} else if(!this.everyxdance$reset) {
 			this.everyxdance$reset();
 			this.everyxdance$reset = true;
@@ -96,9 +93,5 @@ public abstract class IronGolemModelMixin<T extends IronGolem> implements IDance
 			}
 			default -> MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 		}
-	}
-	@Override
-	public int everyxdance$getDanceIndex() {
-		return this.everyxdance$index;
 	}
 }

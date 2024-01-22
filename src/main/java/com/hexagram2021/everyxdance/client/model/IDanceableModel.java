@@ -1,14 +1,14 @@
 package com.hexagram2021.everyxdance.client.model;
 
 import com.google.common.collect.Lists;
+import com.hexagram2021.everyxdance.api.client.DanceAnimation;
 import com.hexagram2021.everyxdance.client.EveryXDanceClient;
 import com.hexagram2021.everyxdance.client.animation.AnimatedModelPart;
-import com.hexagram2021.everyxdance.client.animation.DanceAnimation;
 import com.hexagram2021.everyxdance.client.animation.EveryXDanceAnimations;
 import com.hexagram2021.everyxdance.common.config.EveryXDanceCommonConfig;
+import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
 import com.hexagram2021.everyxdance.common.util.EveryXDanceLogger;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.AnimationState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IExtensibleEnum;
@@ -27,8 +27,6 @@ public interface IDanceableModel extends IPrepareDanceModel {
 
 	void everyxdance$reset();
 
-	int everyxdance$getDanceIndex();
-
 	List<Preset> PRESETS = Lists.newArrayList();
 
 	static int getDancePresetIndex(RandomSource randomSource) {
@@ -43,13 +41,13 @@ public interface IDanceableModel extends IPrepareDanceModel {
 		return randomSource.nextInt(PRESETS.size());
 	}
 
-	static void performDance(IDanceableModel model, boolean isBaby, AnimationState animationState, float ageInTicks) {
-		int presetIndex = model.everyxdance$getDanceIndex();
+	static void performDance(IDanceableModel model, boolean isBaby, IDanceableEntity danceableEntity, float ageInTicks) {
+		int presetIndex = danceableEntity.everyxdance$getDanceIndex();
 		if(presetIndex >= 0 && presetIndex < PRESETS.size()) {
 			Preset preset = PRESETS.get(presetIndex);
 			model.everyxdance$reset();
 			model.everyxdance$prepareDance(preset.preparation(), isBaby);
-			EveryXDanceAnimations.animate(model, animationState, preset.animation(), ageInTicks);
+			EveryXDanceAnimations.animate(model, danceableEntity.everyxdance$getAnimationState(), preset.animation(), ageInTicks);
 		}
 	}
 
