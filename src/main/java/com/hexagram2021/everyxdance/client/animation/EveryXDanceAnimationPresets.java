@@ -2,14 +2,11 @@ package com.hexagram2021.everyxdance.client.animation;
 
 import com.hexagram2021.everyxdance.api.client.DanceAnimation;
 import com.hexagram2021.everyxdance.api.client.DanceAnimationChannel;
-import net.minecraft.client.animation.AnimationChannel;
-import net.minecraft.client.animation.Keyframe;
-import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.joml.Vector3f;
 
-import java.util.Arrays;
+import static com.hexagram2021.everyxdance.api.client.DanceAnimationChannel.*;
 
 @OnlyIn(Dist.CLIENT)
 public class EveryXDanceAnimationPresets {
@@ -192,45 +189,10 @@ public class EveryXDanceAnimationPresets {
 			))
 			.build();
 
-	static KeyframeHolder keyHard(float timestamp, Vector3f target) {
+	public static KeyframeHolder keyHard(float timestamp, Vector3f target) {
 		return new KeyframeHolder(timestamp, target, DanceAnimationChannel.Interpolations.LINEAR);
 	}
-	static KeyframeHolder keySoft(float timestamp, Vector3f target) {
+	public static KeyframeHolder keySoft(float timestamp, Vector3f target) {
 		return new KeyframeHolder(timestamp, target, DanceAnimationChannel.Interpolations.CATMULL_ROM);
-	}
-	static DanceAnimationChannel position(float lengthInSeconds, KeyframeHolder... keyframes) {
-		return new DanceAnimationChannel(AnimationChannel.Targets.POSITION, new DanceAnimationChannel.Keyframes(
-				lengthInSeconds, Arrays.stream(keyframes).map(k -> k.build(EveryXDanceAnimationPresets::posVec)).toArray(Keyframe[]::new)
-		));
-	}
-	static DanceAnimationChannel rotation(float lengthInSeconds, KeyframeHolder... keyframes) {
-		return new DanceAnimationChannel(AnimationChannel.Targets.ROTATION, new DanceAnimationChannel.Keyframes(
-				lengthInSeconds, Arrays.stream(keyframes).map(k -> k.build(EveryXDanceAnimationPresets::degreeVec)).toArray(Keyframe[]::new)
-		));
-	}
-	static DanceAnimationChannel scale(float lengthInSeconds, KeyframeHolder... keyframes) {
-		return new DanceAnimationChannel(AnimationChannel.Targets.SCALE, new DanceAnimationChannel.Keyframes(
-				lengthInSeconds, Arrays.stream(keyframes).map(k -> k.build(EveryXDanceAnimationPresets::scaleVec)).toArray(Keyframe[]::new)
-		));
-	}
-
-	static Vector3f posVec(float x, float y, float z) {
-		return new Vector3f(x, -y, z);
-	}
-	static Vector3f degreeVec(float xRot, float yRot, float zRot) {
-		return new Vector3f(xRot * Mth.DEG_TO_RAD, yRot * Mth.DEG_TO_RAD, zRot * Mth.DEG_TO_RAD);
-	}
-	static Vector3f scaleVec(float xScale, float yScale, float zScale) {
-		return new Vector3f(xScale - 1.0F, yScale - 1.0F, zScale - 1.0F);
-	}
-
-	interface VecTransformer {
-		Vector3f transform(float x, float y, float z);
-	}
-
-	record KeyframeHolder(float timestamp, Vector3f target, AnimationChannel.Interpolation interpolation) {
-		public Keyframe build(VecTransformer transformer) {
-			return new Keyframe(this.timestamp, transformer.transform(this.target.x, this.target.y, this.target.z), this.interpolation);
-		}
 	}
 }

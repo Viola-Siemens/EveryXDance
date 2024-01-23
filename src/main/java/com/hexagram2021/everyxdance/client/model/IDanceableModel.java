@@ -15,6 +15,13 @@ import net.minecraftforge.common.IExtensibleEnum;
 
 import java.util.List;
 
+/**
+ * Most EntityModel will implement this interface. To check what type of EntityModel it is, use "if (danceableModel instanceof XxxModel xxxModel)".
+ * <br/>
+ * Head, body, left and right arms, left and right legs, and nose can be animated. If a model is missing any part, for example, VillagerModel has no arms, just return an empty AnimatedModelPart.
+ *
+ * @see com.hexagram2021.everyxdance.client.animation.AnimatedModelPart
+ */
 @OnlyIn(Dist.CLIENT)
 public interface IDanceableModel extends IPrepareDanceModel {
 	AnimatedModelPart everyxdance$getHead();
@@ -51,6 +58,15 @@ public interface IDanceableModel extends IPrepareDanceModel {
 		}
 	}
 
+	/**
+	 * Dancing animation preset.
+	 * @param name			Name of the preset
+	 * @param preparation	Default pose of the animation. For example, standing or sitting or crawling.
+	 * @param animation		Dance animation of the preset.
+	 *
+	 * @see com.hexagram2021.everyxdance.client.model.IDanceableModel.Preset.Preparation
+	 * @see com.hexagram2021.everyxdance.api.client.DanceAnimation
+	 */
 	record Preset(String name, Preparation preparation, DanceAnimation animation) implements Comparable<Preset> {
 		private static boolean removeDisabled = false;
 

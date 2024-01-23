@@ -13,6 +13,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
+/**
+ * Similar with AnimationDefinition.
+ *
+ * @param lengthInSeconds
+ * @param animations
+ *
+ * @see net.minecraft.client.animation.AnimationDefinition
+ */
 @OnlyIn(Dist.CLIENT)
 public record DanceAnimation(float lengthInSeconds, Map<DancePart, List<DanceAnimationChannel>> animations) {
 	@OnlyIn(Dist.CLIENT)
