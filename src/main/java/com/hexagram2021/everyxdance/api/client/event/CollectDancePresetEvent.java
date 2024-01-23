@@ -35,9 +35,8 @@ public class CollectDancePresetEvent extends Event implements IModBusEvent {
 	}
 
 	/**
-	 * @deprecated 		use the resource location one.
-	 * @see 			CollectDancePresetEvent#register(ResourceLocation, IDanceableModel.Preset.Preparation, DanceAnimation)
-	 * @param name		name of animation
+	 * @deprecated 		use {@link CollectDancePresetEvent#register(ResourceLocation, IDanceableModel.Preset.Preparation, DanceAnimation)}.
+	 * @param name			name of animation
 	 * @param preparation	animation preparation
 	 * @param animation		animation preset
 	 */

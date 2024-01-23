@@ -28,6 +28,7 @@ public class EveryXDanceClient {
 	public static void onCollectDancePreset(CollectDancePresetEvent event) {
 		event.register(new ResourceLocation(MODID, "piglin_dance"), IDanceableModel.Preset.Preparation.HUMANOID_STAND, PIGLIN_DANCE);
 		event.register(new ResourceLocation(MODID, "subject3"), IDanceableModel.Preset.Preparation.HUMANOID_STAND, SUBJECT3);
+		event.register(new ResourceLocation(MODID, "gangnam_style"), IDanceableModel.Preset.Preparation.HUMANOID_STAND, GANGNAM_STYLE);
 	}
 
 	public static void printPresets() {

@@ -25,6 +25,7 @@ import java.util.function.Function;
 public record DanceAnimation(float lengthInSeconds, Map<DancePart, List<DanceAnimationChannel>> animations) {
 	@OnlyIn(Dist.CLIENT)
 	public enum DancePart implements IExtensibleEnum {
+		ALL(IDanceableModel::getAll),
 		HEAD(IDanceableModel::everyxdance$getHead),
 		BODY(IDanceableModel::everyxdance$getBody),
 		NOSE(IDanceableModel::everyxdance$getNose),

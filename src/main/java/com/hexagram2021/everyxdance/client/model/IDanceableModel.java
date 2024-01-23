@@ -1,6 +1,7 @@
 package com.hexagram2021.everyxdance.client.model;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Streams;
 import com.hexagram2021.everyxdance.api.client.DanceAnimation;
 import com.hexagram2021.everyxdance.client.EveryXDanceClient;
 import com.hexagram2021.everyxdance.client.animation.AnimatedModelPart;
@@ -8,11 +9,13 @@ import com.hexagram2021.everyxdance.client.animation.EveryXDanceAnimations;
 import com.hexagram2021.everyxdance.common.config.EveryXDanceCommonConfig;
 import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
 import com.hexagram2021.everyxdance.common.util.EveryXDanceLogger;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.util.RandomSource;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IExtensibleEnum;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -31,6 +34,18 @@ public interface IDanceableModel extends IPrepareDanceModel {
 	AnimatedModelPart everyxdance$getRightLeg();
 	AnimatedModelPart everyxdance$getLeftLeg();
 	AnimatedModelPart everyxdance$getNose();
+
+	static AnimatedModelPart getAll(IDanceableModel model) {
+		return new AnimatedModelPart(Streams.concat(
+				Arrays.stream(model.everyxdance$getHead().modelParts()),
+				Arrays.stream(model.everyxdance$getBody().modelParts()),
+				Arrays.stream(model.everyxdance$getRightArm().modelParts()),
+				Arrays.stream(model.everyxdance$getLeftArm().modelParts()),
+				Arrays.stream(model.everyxdance$getRightLeg().modelParts()),
+				Arrays.stream(model.everyxdance$getLeftLeg().modelParts()),
+				Arrays.stream(model.everyxdance$getNose().modelParts())
+		).distinct().toArray(ModelPart[]::new));
+	}
 
 	void everyxdance$reset();
 
