@@ -91,7 +91,7 @@ public abstract class IronGolemModelMixin<T extends IronGolem> implements IDance
 				this.rightArm.x = -6.5F;
 				this.leftArm.x = 6.5F;
 			}
-			default -> MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 		}
+		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 	}
 }

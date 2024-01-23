@@ -106,7 +106,7 @@ public abstract class FoxModelMixin<T extends Fox> implements IDanceableModel {
 				this.rightFrontLeg.y = 6.0F;
 				this.rightFrontLeg.z = 6.0F;
 			}
-			default -> MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 		}
+		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 	}
 }

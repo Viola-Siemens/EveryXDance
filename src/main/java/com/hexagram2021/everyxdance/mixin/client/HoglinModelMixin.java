@@ -106,7 +106,7 @@ public abstract class HoglinModelMixin<T extends Mob> implements IDanceableModel
 				this.rightFrontLeg.y = -4.0F;
 				this.rightFrontLeg.z = 9.0F;
 			}
-			default -> MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 		}
+		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 	}
 }

@@ -35,7 +35,7 @@ public class PandaModelMixin<T extends Panda> extends QuadrupedModel<T> implemen
 				this.rightFrontLeg.y = -6.0F;
 				this.rightFrontLeg.z = 3.0F;
 			}
-			default -> MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 		}
+		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 	}
 }

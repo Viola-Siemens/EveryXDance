@@ -110,7 +110,7 @@ public abstract class AxolotlModelMixin<T extends Axolotl> implements IDanceable
 				this.leftHindLeg.zRot = this.rightHindLeg.zRot = 0.0F;
 				this.body.y = 20.0F;
 			}
-			default -> MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 		}
+		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 	}
 }

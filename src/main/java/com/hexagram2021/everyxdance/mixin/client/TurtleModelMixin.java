@@ -42,7 +42,7 @@ public abstract class TurtleModelMixin<T extends Turtle> extends QuadrupedModel<
 				this.rightFrontLeg.y = 4.0F;
 				this.rightFrontLeg.z = 6.0F;
 			}
-			default -> MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 		}
+		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 	}
 }

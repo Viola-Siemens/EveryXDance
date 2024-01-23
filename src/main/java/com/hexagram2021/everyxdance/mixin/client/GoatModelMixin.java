@@ -41,7 +41,7 @@ public abstract class GoatModelMixin<T extends Panda> extends QuadrupedModel<T> 
 				this.rightFrontLeg.y = 3.0F;
 				this.rightFrontLeg.z = 3.0F;
 			}
-			default -> MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 		}
+		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 	}
 }

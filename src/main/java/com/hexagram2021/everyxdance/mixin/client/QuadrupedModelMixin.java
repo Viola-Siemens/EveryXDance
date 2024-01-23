@@ -106,7 +106,7 @@ public abstract class QuadrupedModelMixin<T extends Entity> implements IDanceabl
 				this.rightFrontLeg.y = 4.0F;
 				this.rightFrontLeg.z = 6.0F;
 			}
-			default -> MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 		}
+		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 	}
 }
