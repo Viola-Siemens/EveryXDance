@@ -1,6 +1,6 @@
 package com.hexagram2021.everyxdance.client;
 
-import com.hexagram2021.everyxdance.client.event.CollectDancePresetEvent;
+import com.hexagram2021.everyxdance.api.client.event.CollectDancePresetEvent;
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.common.util.EveryXDanceLogger;
 import net.minecraft.resources.ResourceLocation;

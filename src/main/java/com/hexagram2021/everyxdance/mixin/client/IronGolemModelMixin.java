@@ -1,7 +1,7 @@
 package com.hexagram2021.everyxdance.mixin.client;
 
 import com.hexagram2021.everyxdance.client.animation.AnimatedModelPart;
-import com.hexagram2021.everyxdance.client.event.CustomPrepareDanceEvent;
+import com.hexagram2021.everyxdance.api.client.event.CustomPrepareDanceEvent;
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
 import net.minecraft.client.model.IronGolemModel;

@@ -1,6 +1,6 @@
 package com.hexagram2021.everyxdance.mixin.client;
 
-import com.hexagram2021.everyxdance.client.event.CustomPrepareDanceEvent;
+import com.hexagram2021.everyxdance.api.client.event.CustomPrepareDanceEvent;
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.client.model.IPrepareDanceModel;
 import net.minecraft.client.model.PandaModel;

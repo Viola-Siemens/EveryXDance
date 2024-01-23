@@ -1,13 +1,15 @@
-package com.hexagram2021.everyxdance.client.event;
+package com.hexagram2021.everyxdance.api.client.event;
 
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.client.model.IPrepareDanceModel;
 import net.minecraftforge.eventbus.api.Event;
 
 /**
- * Fired in client side on Forge bus.
+ * Fired in client side on Forge bus, only when an entity model prepares to dance.
  * <br/>
  * This event is not cancellable, and does not have a result.
+ *
+ * @see com.hexagram2021.everyxdance.client.model.IDanceableModel.Preset.Preparation
  */
 public class CustomPrepareDanceEvent extends Event {
 	private final IPrepareDanceModel model;

@@ -1,4 +1,4 @@
-package com.hexagram2021.everyxdance.client.event;
+package com.hexagram2021.everyxdance.api.client.event;
 
 import com.google.common.collect.Lists;
 import com.hexagram2021.everyxdance.api.client.DanceAnimation;
