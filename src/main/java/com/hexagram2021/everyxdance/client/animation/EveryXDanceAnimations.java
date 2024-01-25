@@ -43,7 +43,7 @@ public final class EveryXDanceAnimations {
 					Keyframe nextFrame = frames[j];
 					float diff = currentTimeStamp - currentFrame.timestamp();
 
-					nextFrame.interpolation().apply(
+					currentFrame.interpolation().apply(
 							cache,
 							Mth.clamp(diff / (nextFrame.timestamp() - currentFrame.timestamp() + nextTimeStamp), 0.0F, 1.0F),
 							frames, i, j, speed
