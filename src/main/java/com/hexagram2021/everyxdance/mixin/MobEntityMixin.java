@@ -57,22 +57,24 @@ public abstract class MobEntityMixin extends LivingEntity implements IDanceableE
 		this.everyxdance$setRemainingDanceTick(nbt.getInt(REMAINING_TICKS_TAG));
 	}
 
-	@Inject(method = "tick", at = @At(value = "TAIL"))
+	@Inject(method = "aiStep", at = @At(value = "TAIL"))
 	public void everyxdance$tickDance(CallbackInfo ci) {
-		int dancingTicks = this.everyxdance$getRemainingDanceTick();
-		if(dancingTicks > 0) {
-			this.everyxdance$setRemainingDanceTick(dancingTicks - 1);
-		}
-		Mob current = (Mob)(Object)this;
-		LivingEntity target;
-		if(current.getBrain().hasMemoryValue(MemoryModuleType.ATTACK_TARGET)) {
-			target = current.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET).orElse(current.getTarget());
-		} else {
-			target = current.getTarget();
-		}
-		if(target != null && target.isDeadOrDying() && EveryXDanceCommonConfig.DANCEABLE_MOB_TYPES.get().contains(getRegistryName(current.getType()).toString()) &&
-				RandomSource.create(current.level().getGameTime()).nextInt(100) < EveryXDanceCommonConfig.MOB_DANCE_POSSIBILITY_ATTACK.get()) {
-			this.everyxdance$startDancing();
+		if(!this.level().isClientSide) {
+			int dancingTicks = this.everyxdance$getRemainingDanceTick();
+			if (dancingTicks > 0) {
+				this.everyxdance$setRemainingDanceTick(dancingTicks - 1);
+			}
+			Mob current = (Mob) (Object) this;
+			LivingEntity target;
+			if (current.getBrain().hasMemoryValue(MemoryModuleType.ATTACK_TARGET)) {
+				target = current.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET).orElse(current.getTarget());
+			} else {
+				target = current.getTarget();
+			}
+			if (target != null && target.isDeadOrDying() && EveryXDanceCommonConfig.DANCEABLE_MOB_TYPES.get().contains(getRegistryName(current.getType()).toString()) &&
+					RandomSource.create(current.level().getGameTime()).nextInt(100) < EveryXDanceCommonConfig.MOB_DANCE_POSSIBILITY_ATTACK.get()) {
+				this.everyxdance$startDancing();
+			}
 		}
 	}
 

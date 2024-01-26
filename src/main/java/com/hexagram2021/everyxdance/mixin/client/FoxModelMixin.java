@@ -6,6 +6,10 @@ import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
 import net.minecraft.client.model.FoxModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.world.entity.animal.Fox;
 import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Final;
@@ -14,7 +18,9 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FoxModel.class)
 public abstract class FoxModelMixin<T extends Fox> implements IDanceableModel {
@@ -38,6 +44,25 @@ public abstract class FoxModelMixin<T extends Fox> implements IDanceableModel {
 
 	@Unique
 	private boolean everyxdance$reset = true;
+
+	@Redirect(method = "createBodyLayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/geom/builders/CubeListBuilder;addBox(FFFFFFLnet/minecraft/client/model/geom/builders/CubeDeformation;)Lnet/minecraft/client/model/geom/builders/CubeListBuilder;", ordinal = 1))
+	private static CubeListBuilder everyxdance$modifyCube(CubeListBuilder instance, float originX, float originY, float originZ, float dimensionX, float dimensionY, float dimensionZ, CubeDeformation deformation) {
+		return instance.addBox(originX - 6.0F, originY, originZ, dimensionX, dimensionY, dimensionZ, deformation);
+	}
+
+	@Inject(method = "createBodyLayer", at = @At(value = "RETURN"))
+	private static void everyxdance$modifyPivot(CallbackInfoReturnable<LayerDefinition> cir) {
+		PartDefinition rightArm = cir.getReturnValue().mesh.getRoot().getChild("right_front_leg");
+		rightArm.partPose.x = 1.0F;
+		PartDefinition rightLeg = cir.getReturnValue().mesh.getRoot().getChild("right_hind_leg");
+		rightLeg.partPose.x = 1.0F;
+	}
+
+	@Inject(method = "prepareMobModel(Lnet/minecraft/world/entity/animal/Fox;FFF)V", at = @At(value = "TAIL"))
+	private void everyxdance$fixRightArmAndLeg(T entity, float limbSwing, float limbSwingAmount, float tick, CallbackInfo ci) {
+		this.rightFrontLeg.x = 1.0F;
+		this.rightHindLeg.x = 1.0F;
+	}
 
 	@Inject(method = "setupAnim(Lnet/minecraft/world/entity/animal/Fox;FFFFF)V", at = @At(value = "RETURN"))
 	private void everyxdance$setupAnimIfDancing(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
@@ -101,9 +126,9 @@ public abstract class FoxModelMixin<T extends Fox> implements IDanceableModel {
 				}
 				this.body.y = 3.5F;
 				this.body.z = 8.0F;
-				this.leftFrontLeg.y = 6.0F;
+				this.leftFrontLeg.y = 10.0F;
 				this.leftFrontLeg.z = 6.0F;
-				this.rightFrontLeg.y = 6.0F;
+				this.rightFrontLeg.y = 10.0F;
 				this.rightFrontLeg.z = 6.0F;
 			}
 		}
