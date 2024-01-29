@@ -62,7 +62,7 @@ public abstract class WolfModelMixin<T extends Wolf> implements IDanceableModel 
 	}
 	@Override
 	public AnimatedModelPart everyxdance$getBody() {
-		return new AnimatedModelPart(this.body);
+		return new AnimatedModelPart(this.body, this.upperBody);
 	}
 	@Override
 	public AnimatedModelPart everyxdance$getRightArm() {
@@ -88,6 +88,7 @@ public abstract class WolfModelMixin<T extends Wolf> implements IDanceableModel 
 	@Override
 	public void everyxdance$reset() {
 		this.headParts().forEach(ModelPart::resetPose);
+		this.realHead.resetPose();
 		this.bodyParts().forEach(ModelPart::resetPose);
 	}
 	@Override

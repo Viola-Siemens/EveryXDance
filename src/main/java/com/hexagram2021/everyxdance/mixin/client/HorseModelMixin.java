@@ -1,11 +1,14 @@
 package com.hexagram2021.everyxdance.mixin.client;
 
+import com.hexagram2021.everyxdance.api.client.event.CustomPrepareDanceEvent;
 import com.hexagram2021.everyxdance.client.animation.AnimatedModelPart;
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
 import net.minecraft.client.model.HorseModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
+import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -23,11 +26,19 @@ public abstract class HorseModelMixin<T extends AbstractHorse> implements IDance
 	@Shadow @Final
 	private ModelPart rightFrontLeg;
 	@Shadow @Final
+	private ModelPart rightFrontBabyLeg;
+	@Shadow @Final
 	private ModelPart leftFrontLeg;
+	@Shadow @Final
+	private ModelPart leftFrontBabyLeg;
 	@Shadow @Final
 	private ModelPart rightHindLeg;
 	@Shadow @Final
+	private ModelPart rightHindBabyLeg;
+	@Shadow @Final
 	private ModelPart leftHindLeg;
+	@Shadow @Final
+	private ModelPart leftHindBabyLeg;
 
 	@Shadow
 	public abstract Iterable<ModelPart> headParts();
@@ -60,19 +71,19 @@ public abstract class HorseModelMixin<T extends AbstractHorse> implements IDance
 	}
 	@Override
 	public AnimatedModelPart everyxdance$getRightArm() {
-		return new AnimatedModelPart(this.rightFrontLeg);
+		return new AnimatedModelPart(this.rightFrontLeg, this.rightFrontBabyLeg);
 	}
 	@Override
 	public AnimatedModelPart everyxdance$getLeftArm() {
-		return new AnimatedModelPart(this.leftFrontLeg);
+		return new AnimatedModelPart(this.leftFrontLeg, this.leftFrontBabyLeg);
 	}
 	@Override
 	public AnimatedModelPart everyxdance$getRightLeg() {
-		return new AnimatedModelPart(this.rightHindLeg);
+		return new AnimatedModelPart(this.rightHindLeg, this.rightHindBabyLeg);
 	}
 	@Override
 	public AnimatedModelPart everyxdance$getLeftLeg() {
-		return new AnimatedModelPart(this.leftHindLeg);
+		return new AnimatedModelPart(this.leftHindLeg, this.leftHindBabyLeg);
 	}
 	@Override
 	public AnimatedModelPart everyxdance$getNose() {
@@ -86,6 +97,24 @@ public abstract class HorseModelMixin<T extends AbstractHorse> implements IDance
 	}
 	@Override
 	public void everyxdance$prepareDance(Preset.Preparation preparation, boolean isBaby) {
-		//TODO
+		switch (preparation) {
+			case HUMANOID_STAND -> {
+				this.body.xRot = -Mth.HALF_PI;
+				if(isBaby) {
+					this.headParts.y = -8.0F;
+					this.headParts.z = 4.0F;
+				} else {
+					this.headParts.y = -12.0F;
+					this.headParts.z = 6.0F;
+				}
+				this.body.y = 8.0F;
+				this.body.z = 8.0F;
+				this.leftFrontLeg.y = this.leftFrontBabyLeg.y = -6.0F;
+				this.leftFrontLeg.z = this.leftFrontBabyLeg.z = 6.0F;
+				this.rightFrontLeg.y = this.rightFrontBabyLeg.y = -6.0F;
+				this.rightFrontLeg.z = this.rightFrontBabyLeg.z = 6.0F;
+			}
+		}
+		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 	}
 }

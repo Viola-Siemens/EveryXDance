@@ -23,6 +23,7 @@
     "client.LlamaModelMixin",
     "client.OcelotModelMixin",
     "client.PandaModelMixin",
+    "client.PolarBearModelMixin",
     "client.QuadrupedModelMixin",
     "client.RabbitModelMixin",
     "client.RavagerModelMixin",
