@@ -1,11 +1,13 @@
 package com.hexagram2021.everyxdance.mixin.client;
 
+import com.hexagram2021.everyxdance.api.client.event.CustomPrepareDanceEvent;
 import com.hexagram2021.everyxdance.client.animation.AnimatedModelPart;
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
 import net.minecraft.client.model.LlamaModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.animal.horse.AbstractChestedHorse;
+import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -85,6 +87,24 @@ public class LlamaModelMixin<T extends AbstractChestedHorse> implements IDanceab
 	}
 	@Override
 	public void everyxdance$prepareDance(Preset.Preparation preparation, boolean isBaby) {
-		//TODO
+		switch (preparation) {
+			case HUMANOID_STAND -> {
+				this.body.xRot = 0.0F;
+				if(isBaby) {
+					this.head.y = -6.0F;
+					this.head.z = 4.0F;
+				} else {
+					this.head.y = -10.0F;
+					this.head.z = 10.0F;
+				}
+				this.body.y = 2.0F;
+				this.body.z = 10.0F;
+				this.leftFrontLeg.y = -6.0F;
+				this.leftFrontLeg.z = 6.0F;
+				this.rightFrontLeg.y = -6.0F;
+				this.rightFrontLeg.z = 6.0F;
+			}
+		}
+		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 	}
 }
