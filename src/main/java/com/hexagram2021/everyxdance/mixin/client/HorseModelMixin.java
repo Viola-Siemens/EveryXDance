@@ -7,6 +7,8 @@ import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
 import net.minecraft.client.model.HorseModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Final;
@@ -54,7 +56,7 @@ public abstract class HorseModelMixin<T extends AbstractHorse> implements IDance
 			if(this.everyxdance$reset) {
 				this.everyxdance$reset = false;
 			}
-			IDanceableModel.performDance(this, entity.isBaby(), danceableEntity, entity.tickCount);
+			IDanceableModel.performDance(this, entity, danceableEntity, entity.tickCount);
 		} else if(!this.everyxdance$reset) {
 			this.everyxdance$reset();
 			this.everyxdance$reset = true;
@@ -96,25 +98,35 @@ public abstract class HorseModelMixin<T extends AbstractHorse> implements IDance
 		this.bodyParts().forEach(ModelPart::resetPose);
 	}
 	@Override
-	public void everyxdance$prepareDance(Preset.Preparation preparation, boolean isBaby) {
+	public void everyxdance$prepareDance(Preset.Preparation preparation, Entity entity) {
 		switch (preparation) {
-			case HUMANOID_STAND -> {
-				this.body.xRot = -Mth.HALF_PI;
-				if(isBaby) {
-					this.headParts.y = -8.0F;
-					this.headParts.z = 4.0F;
-				} else {
-					this.headParts.y = -12.0F;
-					this.headParts.z = 6.0F;
-				}
-				this.body.y = 8.0F;
-				this.body.z = 8.0F;
-				this.leftFrontLeg.y = this.leftFrontBabyLeg.y = -6.0F;
-				this.leftFrontLeg.z = this.leftFrontBabyLeg.z = 6.0F;
-				this.rightFrontLeg.y = this.rightFrontBabyLeg.y = -6.0F;
-				this.rightFrontLeg.z = this.rightFrontBabyLeg.z = 6.0F;
+			case HUMANOID_STAND -> this.everyxdance$prepareUpperBody(entity instanceof LivingEntity living && living.isBaby());
+			case HUMANOID_SIT -> {
+				this.leftHindLeg.xRot = this.leftHindBabyLeg.xRot =
+						this.rightHindLeg.xRot = this.rightHindBabyLeg.xRot = Mth.PI * 2.0F / 5.0F;
+				this.leftHindLeg.yRot = this.leftHindBabyLeg.yRot = -Mth.PI / 10.0F;
+				this.rightHindLeg.yRot = this.rightHindBabyLeg.yRot = Mth.PI / 10.0F;
+				this.everyxdance$prepareUpperBody(entity instanceof LivingEntity living && living.isBaby());
 			}
 		}
 		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
+	}
+
+	@Unique
+	private void everyxdance$prepareUpperBody(boolean isBaby) {
+		this.body.xRot = -Mth.HALF_PI;
+		if(isBaby) {
+			this.headParts.y = -8.0F;
+			this.headParts.z = 4.0F;
+		} else {
+			this.headParts.y = -12.0F;
+			this.headParts.z = 6.0F;
+		}
+		this.body.y = 8.0F;
+		this.body.z = 8.0F;
+		this.leftFrontLeg.y = this.leftFrontBabyLeg.y = -6.0F;
+		this.leftFrontLeg.z = this.leftFrontBabyLeg.z = 6.0F;
+		this.rightFrontLeg.y = this.rightFrontBabyLeg.y = -6.0F;
+		this.rightFrontLeg.z = this.rightFrontBabyLeg.z = 6.0F;
 	}
 }

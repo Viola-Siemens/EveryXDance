@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "everyxdance.refmap.json",
   "mixins": [
+    "AvoidEntityGoalMixin",
     "CelebrateVillagersSurvivedRaidMixin",
     "LivingEntityMixin",
     "MobEntityMixin"

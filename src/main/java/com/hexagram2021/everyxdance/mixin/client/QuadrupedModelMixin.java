@@ -1,11 +1,12 @@
 package com.hexagram2021.everyxdance.mixin.client;
 
-import com.hexagram2021.everyxdance.client.animation.AnimatedModelPart;
 import com.hexagram2021.everyxdance.api.client.event.CustomPrepareDanceEvent;
+import com.hexagram2021.everyxdance.client.animation.AnimatedModelPart;
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
 import net.minecraft.client.model.QuadrupedModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.common.MinecraftForge;
@@ -46,7 +47,7 @@ public abstract class QuadrupedModelMixin<T extends Entity> implements IDanceabl
 			if(this.everyxdance$reset) {
 				this.everyxdance$reset = false;
 			}
-			IDanceableModel.performDance(this, entity instanceof LivingEntity living && living.isBaby(), danceableEntity, entity.tickCount);
+			IDanceableModel.performDance(this, entity, danceableEntity, entity.tickCount);
 		} else if(!this.everyxdance$reset) {
 			this.everyxdance$reset();
 			this.everyxdance$reset = true;
@@ -88,25 +89,34 @@ public abstract class QuadrupedModelMixin<T extends Entity> implements IDanceabl
 		this.bodyParts().forEach(ModelPart::resetPose);
 	}
 	@Override
-	public void everyxdance$prepareDance(Preset.Preparation preparation, boolean isBaby) {
+	public void everyxdance$prepareDance(Preset.Preparation preparation, Entity entity) {
 		switch (preparation) {
-			case HUMANOID_STAND -> {
-				this.body.xRot = 0.0F;
-				if(isBaby) {
-					this.head.y = 6.0F;
-					this.head.z = 4.0F;
-				} else {
-					this.head.y = -1.0F;
-					this.head.z = 11.0F;
-				}
-				this.body.y = 12.5F;
-				this.body.z = 12.0F;
-				this.leftFrontLeg.y = 4.0F;
-				this.leftFrontLeg.z = 6.0F;
-				this.rightFrontLeg.y = 4.0F;
-				this.rightFrontLeg.z = 6.0F;
+			case HUMANOID_STAND -> this.everyxdance$prepareUpperBody(entity instanceof LivingEntity living && living.isBaby());
+			case HUMANOID_SIT -> {
+				this.leftHindLeg.xRot = this.rightHindLeg.xRot = Mth.PI * 2.0F / 5.0F;
+				this.leftHindLeg.yRot = -Mth.PI / 10.0F;
+				this.rightHindLeg.yRot = Mth.PI / 10.0F;
+				this.everyxdance$prepareUpperBody(entity instanceof LivingEntity living && living.isBaby());
 			}
 		}
 		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
+	}
+
+	@Unique
+	private void everyxdance$prepareUpperBody(boolean isBaby) {
+		this.body.xRot = 0.0F;
+		if(isBaby) {
+			this.head.y = 6.0F;
+			this.head.z = 4.0F;
+		} else {
+			this.head.y = -1.0F;
+			this.head.z = 11.0F;
+		}
+		this.body.y = 12.5F;
+		this.body.z = 12.0F;
+		this.leftFrontLeg.y = 4.0F;
+		this.leftFrontLeg.z = 6.0F;
+		this.rightFrontLeg.y = 4.0F;
+		this.rightFrontLeg.z = 6.0F;
 	}
 }

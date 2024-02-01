@@ -8,6 +8,8 @@ import net.minecraft.client.model.IronGolemModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Final;
@@ -56,7 +58,7 @@ public abstract class IronGolemModelMixin<T extends IronGolem> implements IDance
 			if(this.everyxdance$reset) {
 				this.everyxdance$reset = false;
 			}
-			IDanceableModel.performDance(this, entity.isBaby(), danceableEntity, entity.tickCount);
+			IDanceableModel.performDance(this, entity, danceableEntity, entity.tickCount);
 		} else if(!this.everyxdance$reset) {
 			this.everyxdance$reset();
 			this.everyxdance$reset = true;
@@ -97,9 +99,13 @@ public abstract class IronGolemModelMixin<T extends IronGolem> implements IDance
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 	}
 	@Override
-	public void everyxdance$prepareDance(Preset.Preparation preparation, boolean isBaby) {
+	public void everyxdance$prepareDance(Preset.Preparation preparation, Entity entity) {
 		switch (preparation) {
-
+			case HUMANOID_SIT -> {
+				this.leftLeg.xRot = this.rightLeg.xRot = Mth.PI * 2.0F / 5.0F;
+				this.leftLeg.yRot = -Mth.PI / 10.0F;
+				this.rightLeg.yRot = Mth.PI / 10.0F;
+			}
 		}
 		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 	}

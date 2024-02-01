@@ -1,11 +1,14 @@
 package com.hexagram2021.everyxdance.mixin.client;
 
+import com.hexagram2021.everyxdance.api.client.event.CustomPrepareDanceEvent;
 import com.hexagram2021.everyxdance.client.animation.AnimatedModelPart;
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
 import net.minecraft.client.model.VexModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.monster.Vex;
+import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -37,7 +40,7 @@ public abstract class VexModelMixin implements IDanceableModel {
 			if(this.everyxdance$reset) {
 				this.everyxdance$reset = false;
 			}
-			IDanceableModel.performDance(this, entity.isBaby(), danceableEntity, entity.tickCount);
+			IDanceableModel.performDance(this, entity, danceableEntity, entity.tickCount);
 		} else if(!this.everyxdance$reset) {
 			this.everyxdance$reset();
 			this.everyxdance$reset = true;
@@ -78,6 +81,9 @@ public abstract class VexModelMixin implements IDanceableModel {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 	}
 	@Override
-	public void everyxdance$prepareDance(Preset.Preparation preparation, boolean isBaby) {
+	public void everyxdance$prepareDance(Preset.Preparation preparation, Entity entity) {
+		switch (preparation) {
+		}
+		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 	}
 }

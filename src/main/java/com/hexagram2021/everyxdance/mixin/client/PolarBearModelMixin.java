@@ -7,9 +7,13 @@ import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
 import net.minecraft.client.model.PolarBearModel;
 import net.minecraft.client.model.QuadrupedModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.PolarBear;
 import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -28,25 +32,34 @@ public class PolarBearModelMixin<T extends PolarBear> extends QuadrupedModel<T> 
 	}
 
 	@Override
-	public void everyxdance$prepareDance(IDanceableModel.Preset.Preparation preparation, boolean isBaby) {
+	public void everyxdance$prepareDance(IDanceableModel.Preset.Preparation preparation, Entity entity) {
 		switch (preparation) {
-			case HUMANOID_STAND -> {
-				this.body.xRot = 0.0F;
-				if(isBaby) {
-					this.head.y = -11.0F;
-					this.head.z = 0.0F;
-				} else {
-					this.head.y = -16.0F;
-					this.head.z = 6.0F;
-				}
-				this.body.y = 13.0F;
-				this.body.z = 12.0F;
-				this.leftFrontLeg.y = -8.0F;
-				this.leftFrontLeg.z = 6.0F;
-				this.rightFrontLeg.y = -8.0F;
-				this.rightFrontLeg.z = 6.0F;
+			case HUMANOID_STAND -> this.everyxdance$prepareUpperBody(entity instanceof LivingEntity living && living.isBaby());
+			case HUMANOID_SIT -> {
+				this.leftHindLeg.xRot = this.rightHindLeg.xRot = Mth.PI * 2.0F / 5.0F;
+				this.leftHindLeg.yRot = -Mth.PI / 10.0F;
+				this.rightHindLeg.yRot = Mth.PI / 10.0F;
+				this.everyxdance$prepareUpperBody(entity instanceof LivingEntity living && living.isBaby());
 			}
 		}
 		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
+	}
+
+	@Unique
+	private void everyxdance$prepareUpperBody(boolean isBaby) {
+		this.body.xRot = 0.0F;
+		if(isBaby) {
+			this.head.y = -11.0F;
+			this.head.z = 0.0F;
+		} else {
+			this.head.y = -16.0F;
+			this.head.z = 6.0F;
+		}
+		this.body.y = 13.0F;
+		this.body.z = 12.0F;
+		this.leftFrontLeg.y = -8.0F;
+		this.leftFrontLeg.z = 6.0F;
+		this.rightFrontLeg.y = -8.0F;
+		this.rightFrontLeg.z = 6.0F;
 	}
 }

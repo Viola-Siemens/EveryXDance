@@ -27,6 +27,14 @@ public final class EveryXDanceLogger {
 		log(Level.WARN, object);
 	}
 
+	private static boolean first = true;
+	public static void warnFirst(Object object) {
+		if(first) {
+			first = false;
+			warn(object);
+		}
+	}
+
 	public static void error(String message, Object... params) {
 		logger.log(Level.ERROR, message, params);
 	}

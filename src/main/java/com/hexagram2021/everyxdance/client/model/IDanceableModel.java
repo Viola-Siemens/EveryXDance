@@ -11,6 +11,7 @@ import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
 import com.hexagram2021.everyxdance.common.util.EveryXDanceLogger;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IExtensibleEnum;
@@ -63,12 +64,12 @@ public interface IDanceableModel extends IPrepareDanceModel {
 		return randomSource.nextInt(PRESETS.size());
 	}
 
-	static void performDance(IDanceableModel model, boolean isBaby, IDanceableEntity danceableEntity, float ageInTicks) {
+	static void performDance(IDanceableModel model, Entity entity, IDanceableEntity danceableEntity, float ageInTicks) {
 		int presetIndex = danceableEntity.everyxdance$getDanceIndex();
 		if(presetIndex >= 0 && presetIndex < PRESETS.size()) {
 			Preset preset = PRESETS.get(presetIndex);
 			model.everyxdance$reset();
-			model.everyxdance$prepareDance(preset.preparation(), isBaby);
+			model.everyxdance$prepareDance(preset.preparation(), entity);
 			EveryXDanceAnimations.animate(model, danceableEntity.everyxdance$getAnimationState(), preset.animation(), ageInTicks);
 		}
 	}
