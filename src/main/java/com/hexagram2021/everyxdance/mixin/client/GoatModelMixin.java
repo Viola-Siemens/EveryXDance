@@ -35,7 +35,7 @@ public abstract class GoatModelMixin<T extends Panda> extends QuadrupedModel<T> 
 		switch (preparation) {
 			case HUMANOID_STAND -> this.everyxdance$prepareUpperBody();
 			case HUMANOID_SIT -> {
-				this.leftHindLeg.xRot = this.rightHindLeg.xRot = Mth.PI * 2.0F / 5.0F;
+				this.leftHindLeg.xRot = this.rightHindLeg.xRot = -Mth.PI * 2.0F / 5.0F;
 				this.leftHindLeg.yRot = -Mth.PI / 10.0F;
 				this.rightHindLeg.yRot = Mth.PI / 10.0F;
 				this.everyxdance$prepareUpperBody();

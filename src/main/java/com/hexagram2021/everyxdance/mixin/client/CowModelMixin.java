@@ -24,7 +24,7 @@ public class CowModelMixin<T extends Entity> extends QuadrupedModel<T> implement
 		switch (preparation) {
 			case HUMANOID_STAND -> this.everyxdance$prepareUpperBody(entity instanceof LivingEntity living && living.isBaby());
 			case HUMANOID_SIT -> {
-				this.leftHindLeg.xRot = this.rightHindLeg.xRot = Mth.PI * 2.0F / 5.0F;
+				this.leftHindLeg.xRot = this.rightHindLeg.xRot = -Mth.PI * 2.0F / 5.0F;
 				this.leftHindLeg.yRot = -Mth.PI / 10.0F;
 				this.rightHindLeg.yRot = Mth.PI / 10.0F;
 				this.everyxdance$prepareUpperBody(entity instanceof LivingEntity living && living.isBaby());

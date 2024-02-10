@@ -93,7 +93,7 @@ public abstract class IllagerModelMixin<T extends AbstractIllager> implements ID
 	public void everyxdance$prepareDance(Preset.Preparation preparation, Entity entity) {
 		switch (preparation) {
 			case HUMANOID_SIT -> {
-				this.leftLeg.xRot = this.rightLeg.xRot = Mth.PI * 2.0F / 5.0F;
+				this.leftLeg.xRot = this.rightLeg.xRot = -Mth.PI * 2.0F / 5.0F;
 				this.leftLeg.yRot = -Mth.PI / 10.0F;
 				this.rightLeg.yRot = Mth.PI / 10.0F;
 			}

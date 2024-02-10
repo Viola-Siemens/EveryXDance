@@ -7,7 +7,8 @@
     "AvoidEntityGoalMixin",
     "CelebrateVillagersSurvivedRaidMixin",
     "LivingEntityMixin",
-    "MobEntityMixin"
+    "MobEntityMixin",
+    "VillagerMakeLoveMixin"
   ],
   "minVersion": "0.8",
   "client": [

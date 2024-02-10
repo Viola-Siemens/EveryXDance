@@ -30,6 +30,7 @@ public class EveryXDanceClient {
 		event.register(new ResourceLocation(MODID, "subject3"), IDanceableModel.Preset.Preparation.HUMANOID_STAND, SUBJECT3);
 		event.register(new ResourceLocation(MODID, "gangnam_style"), IDanceableModel.Preset.Preparation.HUMANOID_STAND, GANGNAM_STYLE);
 		event.register(new ResourceLocation(MODID, "california_gurls"), IDanceableModel.Preset.Preparation.HUMANOID_STAND, CALIFORNIA_GURLS);
+		event.register(new ResourceLocation(MODID, "groove_battle"), IDanceableModel.Preset.Preparation.HUMANOID_SIT, GROOVE_BATTLE);
 	}
 
 	public static void printPresets() {

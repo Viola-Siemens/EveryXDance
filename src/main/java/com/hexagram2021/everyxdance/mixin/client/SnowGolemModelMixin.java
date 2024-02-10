@@ -82,7 +82,6 @@ public abstract class SnowGolemModelMixin<T extends Entity> implements IDanceabl
 	@Override
 	public void everyxdance$prepareDance(Preset.Preparation preparation, Entity entity) {
 		switch (preparation) {
-
 		}
 		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 	}

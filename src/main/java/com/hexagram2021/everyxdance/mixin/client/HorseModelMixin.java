@@ -103,7 +103,7 @@ public abstract class HorseModelMixin<T extends AbstractHorse> implements IDance
 			case HUMANOID_STAND -> this.everyxdance$prepareUpperBody(entity instanceof LivingEntity living && living.isBaby());
 			case HUMANOID_SIT -> {
 				this.leftHindLeg.xRot = this.leftHindBabyLeg.xRot =
-						this.rightHindLeg.xRot = this.rightHindBabyLeg.xRot = Mth.PI * 2.0F / 5.0F;
+						this.rightHindLeg.xRot = this.rightHindBabyLeg.xRot = -Mth.PI * 2.0F / 5.0F;
 				this.leftHindLeg.yRot = this.leftHindBabyLeg.yRot = -Mth.PI / 10.0F;
 				this.rightHindLeg.yRot = this.rightHindBabyLeg.yRot = Mth.PI / 10.0F;
 				this.everyxdance$prepareUpperBody(entity instanceof LivingEntity living && living.isBaby());

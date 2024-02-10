@@ -1,5 +1,6 @@
 package com.hexagram2021.everyxdance.api.client;
 
+import com.hexagram2021.everyxdance.api.EveryXDanceMath;
 import net.minecraft.client.animation.AnimationChannel;
 import net.minecraft.client.animation.Keyframe;
 import net.minecraft.util.Mth;
@@ -93,6 +94,14 @@ public record DanceAnimationChannel(AnimationChannel.Target target, Keyframes ke
 			Vector3f from = frames[left].target();
 			Vector3f to = frames[right].target();
 			return from.lerp(to, rate * rate * rate, cache).mul(speed);
+		};
+		/**
+		 * A sharp smooth function, similar to the dispersed one.
+		 */
+		public static final AnimationChannel.Interpolation SMOOTH_DISPERSED = (cache, rate, frames, left, right, speed) -> {
+			Vector3f from = frames[left].target();
+			Vector3f to = frames[right].target();
+			return from.lerp(to, (float)EveryXDanceMath.factSmooth(rate, 5.0D), cache).mul(speed);
 		};
 		/**
 		 * Catmull-rom spline. This is a cubic spline and makes the entire animation smooth and soft.

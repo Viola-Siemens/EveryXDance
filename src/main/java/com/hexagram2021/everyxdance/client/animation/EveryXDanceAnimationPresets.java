@@ -432,6 +432,168 @@ public class EveryXDanceAnimationPresets {
 					new KeyframeHolder(0.25F, new Vector3f(0.0F, 0.0F, -10.0F), Interpolations.SLOW_TO_FAST_CUBIC)
 			))
 			.build();
+	public static final DanceAnimation GROOVE_BATTLE = DanceAnimation.Builder.withLength(4.0F)
+			.addAnimation(DanceAnimation.DancePart.BODY, rotation(
+					2.0F,
+					new KeyframeHolder(0.0F, new Vector3f(50.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.25F, new Vector3f(-5.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.375F, new Vector3f(50.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.5F, new Vector3f(-5.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.75F, new Vector3f(50.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.875F, new Vector3f(-5.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.0F, new Vector3f(50.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.25F, new Vector3f(-5.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.375F, new Vector3f(50.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.5F, new Vector3f(-5.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.625F, new Vector3f(50.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.75F, new Vector3f(-5.0F, 0.0F, 0.0F), Interpolations.DISPERSED),
+					new KeyframeHolder(1.875F, new Vector3f(-5.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED)
+			))
+			.addAnimation(DanceAnimation.DancePart.BODY, position(
+					2.0F,
+					new KeyframeHolder(0.0F, new Vector3f(0.0F, -2.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.25F, new Vector3f(0.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.375F, new Vector3f(0.0F, -2.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.5F, new Vector3f(0.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.75F, new Vector3f(0.0F, -2.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.875F, new Vector3f(0.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.0F, new Vector3f(0.0F, -2.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.25F, new Vector3f(0.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.375F, new Vector3f(0.0F, -2.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.5F, new Vector3f(0.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.625F, new Vector3f(0.0F, -2.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.75F, new Vector3f(0.0F, 0.0F, 0.0F), Interpolations.DISPERSED),
+					new KeyframeHolder(1.875F, new Vector3f(0.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED)
+			))
+			.addAnimation(DanceAnimation.DancePart.HEAD, rotation(
+					2.0F,
+					new KeyframeHolder(0.0F, new Vector3f(20.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.25F, new Vector3f(-10.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.375F, new Vector3f(20.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.5F, new Vector3f(-10.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.75F, new Vector3f(20.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.875F, new Vector3f(-10.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.0F, new Vector3f(20.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.25F, new Vector3f(-10.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.375F, new Vector3f(20.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.5F, new Vector3f(-10.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.625F, new Vector3f(20.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.75F, new Vector3f(-10.0F, 0.0F, 0.0F), Interpolations.DISPERSED),
+					new KeyframeHolder(1.875F, new Vector3f(-10.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED)
+			))
+			.addAnimation(DanceAnimation.DancePart.HEAD, position(
+					2.0F,
+					new KeyframeHolder(0.0F, new Vector3f(0.0F, -3.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.25F, new Vector3f(0.0F, 0.0F, 0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.375F, new Vector3f(0.0F, -3.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.5F, new Vector3f(0.0F, 0.0F, 0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.75F, new Vector3f(0.0F, -3.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.875F, new Vector3f(0.0F, 0.0F, 0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.0F, new Vector3f(0.0F, -3.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.25F, new Vector3f(0.0F, 0.0F, 0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.375F, new Vector3f(0.0F, -3.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.5F, new Vector3f(0.0F, 0.0F, 0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.625F, new Vector3f(0.0F, -3.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.75F, new Vector3f(0.0F, 0.0F, 0.5F), Interpolations.DISPERSED),
+					new KeyframeHolder(1.875F, new Vector3f(0.0F, 0.0F, 0.5F), Interpolations.SMOOTH_DISPERSED)
+			))
+			.addAnimation(DanceAnimation.DancePart.RIGHT_ARM, rotation(
+					2.0F,
+					new KeyframeHolder(0.0F, new Vector3f(-80.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.25F, new Vector3f(-90.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.375F, new Vector3f(-80.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.5F, new Vector3f(-90.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.75F, new Vector3f(-80.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.875F, new Vector3f(-90.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.0F, new Vector3f(-80.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.25F, new Vector3f(-90.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.375F, new Vector3f(-80.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.5F, new Vector3f(-90.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.625F, new Vector3f(-80.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.75F, new Vector3f(-90.0F, 0.0F, 0.0F), Interpolations.DISPERSED),
+					new KeyframeHolder(1.875F, new Vector3f(-90.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED)
+			))
+			.addAnimation(DanceAnimation.DancePart.RIGHT_ARM, position(
+					2.0F,
+					new KeyframeHolder(0.0F, new Vector3f(0.0F, -1.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.25F, new Vector3f(0.0F, 0.0F, 0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.375F, new Vector3f(0.0F, -1.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.5F, new Vector3f(0.0F, 0.0F, 0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.75F, new Vector3f(0.0F, -1.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.875F, new Vector3f(0.0F, 0.0F, 0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.0F, new Vector3f(0.0F, -1.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.25F, new Vector3f(0.0F, 0.0F, 0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.375F, new Vector3f(0.0F, -1.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.5F, new Vector3f(0.0F, 0.0F, 0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.625F, new Vector3f(0.0F, -1.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.75F, new Vector3f(0.0F, 0.0F, 0.5F), Interpolations.DISPERSED),
+					new KeyframeHolder(1.875F, new Vector3f(0.0F, 0.0F, 0.5F), Interpolations.SMOOTH_DISPERSED)
+			))
+			.addAnimation(DanceAnimation.DancePart.LEFT_ARM, rotation(
+					2.0F,
+					new KeyframeHolder(0.0F, new Vector3f(-80.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.25F, new Vector3f(-90.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.375F, new Vector3f(-80.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.5F, new Vector3f(-90.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.75F, new Vector3f(-80.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.875F, new Vector3f(-90.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.0F, new Vector3f(-80.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.25F, new Vector3f(-90.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.375F, new Vector3f(-80.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.5F, new Vector3f(-90.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.625F, new Vector3f(-80.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.75F, new Vector3f(-90.0F, 0.0F, 0.0F), Interpolations.DISPERSED),
+					new KeyframeHolder(1.875F, new Vector3f(-90.0F, 0.0F, 0.0F), Interpolations.SMOOTH_DISPERSED)
+			))
+			.addAnimation(DanceAnimation.DancePart.LEFT_ARM, position(
+					2.0F,
+					new KeyframeHolder(0.0F, new Vector3f(0.0F, -1.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.25F, new Vector3f(0.0F, 0.0F, 0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.375F, new Vector3f(0.0F, -1.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.5F, new Vector3f(0.0F, 0.0F, 0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.75F, new Vector3f(0.0F, -1.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.875F, new Vector3f(0.0F, 0.0F, 0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.0F, new Vector3f(0.0F, -1.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.25F, new Vector3f(0.0F, 0.0F, 0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.375F, new Vector3f(0.0F, -1.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.5F, new Vector3f(0.0F, 0.0F, 0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.625F, new Vector3f(0.0F, -1.0F, -6.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.75F, new Vector3f(0.0F, 0.0F, 0.5F), Interpolations.DISPERSED),
+					new KeyframeHolder(1.875F, new Vector3f(0.0F, 0.0F, 0.5F), Interpolations.SMOOTH_DISPERSED)
+			))
+			.addAnimation(DanceAnimation.DancePart.RIGHT_LEG, position(
+					2.0F,
+					new KeyframeHolder(0.0F, new Vector3f(0.0F, 0.5F, 1.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.25F, new Vector3f(0.0F, -0.5F, -0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.375F, new Vector3f(0.0F, 0.5F, 1.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.5F, new Vector3f(0.0F, -0.5F, -0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.75F, new Vector3f(0.0F, 0.5F, 1.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.875F, new Vector3f(0.0F, -0.5F, -0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.0F, new Vector3f(0.0F, 0.5F, 1.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.25F, new Vector3f(0.0F, -0.5F, -0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.375F, new Vector3f(0.0F, 0.5F, 1.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.5F, new Vector3f(0.0F, -0.5F, -0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.625F, new Vector3f(0.0F, 0.5F, 1.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.75F, new Vector3f(0.0F, -0.5F, -0.5F), Interpolations.DISPERSED),
+					new KeyframeHolder(1.875F, new Vector3f(0.0F, -0.5F, -0.5F), Interpolations.SMOOTH_DISPERSED)
+			))
+			.addAnimation(DanceAnimation.DancePart.LEFT_LEG, position(
+					2.0F,
+					new KeyframeHolder(0.0F, new Vector3f(0.0F, 0.5F, 1.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.25F, new Vector3f(0.0F, -0.5F, -0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.375F, new Vector3f(0.0F, 0.5F, 1.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.5F, new Vector3f(0.0F, -0.5F, -0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.75F, new Vector3f(0.0F, 0.5F, 1.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(0.875F, new Vector3f(0.0F, -0.5F, -0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.0F, new Vector3f(0.0F, 0.5F, 1.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.25F, new Vector3f(0.0F, -0.5F, -0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.375F, new Vector3f(0.0F, 0.5F, 1.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.5F, new Vector3f(0.0F, -0.5F, -0.5F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.625F, new Vector3f(0.0F, 0.5F, 1.0F), Interpolations.SMOOTH_DISPERSED),
+					new KeyframeHolder(1.75F, new Vector3f(0.0F, -0.5F, -0.5F), Interpolations.DISPERSED),
+					new KeyframeHolder(1.875F, new Vector3f(0.0F, -0.5F, -0.5F), Interpolations.SMOOTH_DISPERSED)
+			))
+			.build();
 
 	public static KeyframeHolder keyHard(float timestamp, Vector3f target) {
 		return new KeyframeHolder(timestamp, target, Interpolations.LINEAR);
