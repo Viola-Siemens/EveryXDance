@@ -15,6 +15,7 @@
     "client.AxolotlModelMixin",
     "client.ChickenModelMixin",
     "client.CowModelMixin",
+    "client.EndermanModelMixin",
     "client.FoxModelMixin",
     "client.GoatModelMixin",
     "client.HoglinModelMixin",
@@ -37,6 +38,7 @@
     "client.VexModelMixin",
     "client.VillagerModelMixin",
     "client.WardenModelMixin",
-    "client.WolfModelMixin"
+    "client.WolfModelMixin",
+    "client.AbstractZombieModelMixin"
   ]
 }

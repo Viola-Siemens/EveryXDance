@@ -97,6 +97,7 @@ public class RabbitModelMixin<T extends Rabbit> implements IDanceableModel {
 		this.leftFrontLeg.getAllParts().forEach(ModelPart::resetPose);
 		this.nose.getAllParts().forEach(ModelPart::resetPose);
 	}
+	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
 	public void everyxdance$prepareDance(Preset.Preparation preparation, Entity entity) {
 		switch (preparation) {

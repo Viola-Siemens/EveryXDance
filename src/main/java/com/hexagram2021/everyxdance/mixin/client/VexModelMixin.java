@@ -6,6 +6,7 @@ import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
 import net.minecraft.client.model.VexModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.monster.Vex;
 import net.minecraftforge.common.MinecraftForge;
@@ -80,9 +81,16 @@ public abstract class VexModelMixin implements IDanceableModel {
 	public void everyxdance$reset() {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 	}
+	@SuppressWarnings("SwitchStatementWithTooFewBranches")
 	@Override
 	public void everyxdance$prepareDance(Preset.Preparation preparation, Entity entity) {
 		switch (preparation) {
+			case HUMANOID_CRAWL -> {
+				this.head.z = -2.0F;
+				this.head.y = 21.0F;
+				this.body.xRot = Mth.HALF_PI;
+				this.leftArm.xRot = this.rightArm.xRot = -Mth.HALF_PI;
+			}
 		}
 		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 	}

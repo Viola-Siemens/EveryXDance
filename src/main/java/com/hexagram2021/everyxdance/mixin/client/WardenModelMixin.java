@@ -93,6 +93,15 @@ public abstract class WardenModelMixin<T extends Warden> implements IDanceableMo
 				this.leftLeg.yRot = -Mth.PI / 10.0F;
 				this.rightLeg.yRot = Mth.PI / 10.0F;
 			}
+			case HUMANOID_CRAWL -> {
+				this.body.xRot = Mth.HALF_PI;
+				this.body.y = -14.0F;
+				this.body.z = -6.0F;
+				this.head.xRot = -Mth.HALF_PI;
+				this.head.y = -12.0F;
+				this.head.z = -4.0F;
+				this.leftArm.xRot = this.rightArm.xRot = -Mth.HALF_PI;
+			}
 		}
 		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 	}

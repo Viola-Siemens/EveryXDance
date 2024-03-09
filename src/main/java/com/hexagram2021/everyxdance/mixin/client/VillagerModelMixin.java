@@ -55,7 +55,7 @@ public abstract class VillagerModelMixin<T extends Entity> implements IDanceable
 	}
 	@Override
 	public AnimatedModelPart everyxdance$getBody() {
-		return new AnimatedModelPart(this.root.getChild("body"));
+		return new AnimatedModelPart(this.root.getChild("body"), this.root.getChild("arms"));
 	}
 	@Override
 	public AnimatedModelPart everyxdance$getRightArm() {
@@ -89,6 +89,18 @@ public abstract class VillagerModelMixin<T extends Entity> implements IDanceable
 				this.leftLeg.xRot = this.rightLeg.xRot = -Mth.PI * 2.0F / 5.0F;
 				this.leftLeg.yRot = -Mth.PI / 10.0F;
 				this.rightLeg.yRot = Mth.PI / 10.0F;
+			}
+			case HUMANOID_CRAWL -> {
+				ModelPart body = this.root.getChild("body");
+				ModelPart arms = this.root.getChild("arms");
+				body.xRot = Mth.HALF_PI;
+				body.y = 9.0F;
+				body.z = -10.0F;
+				this.head.y = 12.0F;
+				this.head.z = -13.5F;
+				arms.xRot = 0.5F;
+				arms.y = 10.5F;
+				arms.z = -6.0F;
 			}
 		}
 		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));

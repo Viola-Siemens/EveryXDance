@@ -106,6 +106,16 @@ public abstract class IronGolemModelMixin<T extends IronGolem> implements IDance
 				this.leftLeg.yRot = -Mth.PI / 10.0F;
 				this.rightLeg.yRot = Mth.PI / 10.0F;
 			}
+			case HUMANOID_CRAWL -> {
+				ModelPart body = this.root.getChild("body");
+				body.xRot = Mth.HALF_PI;
+				body.y = 9.0F;
+				body.z = -14.0F;
+				this.head.y = 12.0F;
+				this.head.z = -18.5F;
+				this.leftArm.y = this.rightArm.y = 8.0F;
+				this.leftArm.z = this.rightArm.z = -11.0F;
+			}
 		}
 		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 	}

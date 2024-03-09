@@ -24,6 +24,7 @@ import java.util.Arrays;
  *
  * @see net.minecraft.client.animation.AnimationChannel
  */
+@SuppressWarnings("unused")
 public record DanceAnimationChannel(AnimationChannel.Target target, Keyframes keyframes) {
 	public record Keyframes(float lengthInSeconds, Keyframe... frames) {
 	}
@@ -98,10 +99,18 @@ public record DanceAnimationChannel(AnimationChannel.Target target, Keyframes ke
 		/**
 		 * A sharp smooth function, similar to the dispersed one.
 		 */
-		public static final AnimationChannel.Interpolation SMOOTH_DISPERSED = (cache, rate, frames, left, right, speed) -> {
+		public static final AnimationChannel.Interpolation SMOOTH_DISPERSED_6 = (cache, rate, frames, left, right, speed) -> {
 			Vector3f from = frames[left].target();
 			Vector3f to = frames[right].target();
-			return from.lerp(to, (float)EveryXDanceMath.factSmooth(rate, 5.0D), cache).mul(speed);
+			return from.lerp(to, (float)EveryXDanceMath.factSmooth(rate, 6.0D, 0.5D), cache).mul(speed);
+		};
+		/**
+		 * A sharp smooth function (not as sharp as the above one).
+		 */
+		public static final AnimationChannel.Interpolation SMOOTH_DISPERSED_3 = (cache, rate, frames, left, right, speed) -> {
+			Vector3f from = frames[left].target();
+			Vector3f to = frames[right].target();
+			return from.lerp(to, (float)EveryXDanceMath.factSmooth(rate, 3.0D, 0.5D), cache).mul(speed);
 		};
 		/**
 		 * Catmull-rom spline. This is a cubic spline and makes the entire animation smooth and soft.

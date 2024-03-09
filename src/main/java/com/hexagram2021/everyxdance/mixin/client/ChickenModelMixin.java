@@ -91,6 +91,7 @@ public abstract class ChickenModelMixin<T extends Entity> implements IDanceableM
 		this.headParts().forEach(ModelPart::resetPose);
 		this.bodyParts().forEach(ModelPart::resetPose);
 	}
+	@SuppressWarnings("SwitchStatementWithTooFewBranches")
 	@Override
 	public void everyxdance$prepareDance(Preset.Preparation preparation, Entity entity) {
 		switch (preparation) {

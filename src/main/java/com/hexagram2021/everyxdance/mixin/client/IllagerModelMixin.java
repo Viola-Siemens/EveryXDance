@@ -62,7 +62,7 @@ public abstract class IllagerModelMixin<T extends AbstractIllager> implements ID
 	}
 	@Override
 	public AnimatedModelPart everyxdance$getBody() {
-		return new AnimatedModelPart(this.root.getChild("body"));
+		return new AnimatedModelPart(this.root.getChild("body"), this.arms);
 	}
 	@Override
 	public AnimatedModelPart everyxdance$getRightArm() {
@@ -96,6 +96,19 @@ public abstract class IllagerModelMixin<T extends AbstractIllager> implements ID
 				this.leftLeg.xRot = this.rightLeg.xRot = -Mth.PI * 2.0F / 5.0F;
 				this.leftLeg.yRot = -Mth.PI / 10.0F;
 				this.rightLeg.yRot = Mth.PI / 10.0F;
+			}
+			case HUMANOID_CRAWL -> {
+				ModelPart body = this.root.getChild("body");
+				body.xRot = Mth.HALF_PI;
+				body.y = 9.0F;
+				body.z = -10.0F;
+				this.head.y = 12.0F;
+				this.head.z = -13.5F;
+				this.arms.xRot = 0.25F;
+				this.arms.y = 10.5F;
+				this.arms.z = -6.0F;
+				this.leftArm.y = this.rightArm.y = 12.0F;
+				this.leftArm.z = this.rightArm.z = -7.5F;
 			}
 		}
 		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));

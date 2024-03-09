@@ -23,6 +23,8 @@ public abstract class HumanoidModelMixin<T extends LivingEntity> implements IDan
 	@Shadow @Final
 	public ModelPart head;
 	@Shadow @Final
+	public ModelPart hat;
+	@Shadow @Final
 	public ModelPart body;
 	@Shadow @Final
 	public ModelPart rightArm;
@@ -56,7 +58,7 @@ public abstract class HumanoidModelMixin<T extends LivingEntity> implements IDan
 
 	@Override
 	public AnimatedModelPart everyxdance$getHead() {
-		return new AnimatedModelPart(this.head);
+		return new AnimatedModelPart(this.head, this.hat);
 	}
 	@Override
 	public AnimatedModelPart everyxdance$getBody() {
@@ -95,6 +97,16 @@ public abstract class HumanoidModelMixin<T extends LivingEntity> implements IDan
 				this.leftLeg.xRot = this.rightLeg.xRot = -Mth.PI * 2.0F / 5.0F;
 				this.leftLeg.yRot = -Mth.PI / 10.0F;
 				this.rightLeg.yRot = Mth.PI / 10.0F;
+			}
+			case HUMANOID_CRAWL -> {
+				this.body.xRot = Mth.HALF_PI;
+				this.body.y = 10.0F;
+				this.body.z = -10.0F;
+				this.head.y = 12.0F;
+				this.head.z = -14.0F;
+				this.leftArm.xRot = this.rightArm.xRot = 0.0F;
+				this.leftArm.y = this.rightArm.y = 12.0F;
+				this.leftArm.z = this.rightArm.z = -8.0F;
 			}
 		}
 		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));

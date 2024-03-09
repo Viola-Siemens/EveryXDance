@@ -6,6 +6,7 @@ import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
 import net.minecraft.client.model.SnowGolemModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Final;
@@ -18,6 +19,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(SnowGolemModel.class)
 public abstract class SnowGolemModelMixin<T extends Entity> implements IDanceableModel {
+	@Shadow @Final
+	private ModelPart root;
 	@Shadow @Final
 	private ModelPart head;
 	@Shadow @Final
@@ -79,9 +82,23 @@ public abstract class SnowGolemModelMixin<T extends Entity> implements IDanceabl
 	public void everyxdance$reset() {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 	}
+	@SuppressWarnings("SwitchStatementWithTooFewBranches")
 	@Override
 	public void everyxdance$prepareDance(Preset.Preparation preparation, Entity entity) {
 		switch (preparation) {
+			case HUMANOID_CRAWL -> {
+				ModelPart body = this.root.getChild("lower_body");
+				body.xRot = Mth.HALF_PI;
+				body.y = 18.0F;
+				body.z = 4.0F;
+				this.upperBody.xRot = Mth.HALF_PI;
+				this.upperBody.y = 18.0F;
+				this.upperBody.z = -7.0F;
+				this.head.y = 22.0F;
+				this.head.z = -19.0F;
+				this.leftArm.y = this.rightArm.y = 14.0F;
+				this.leftArm.z = this.rightArm.z = -13.0F;
+			}
 		}
 		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 	}
