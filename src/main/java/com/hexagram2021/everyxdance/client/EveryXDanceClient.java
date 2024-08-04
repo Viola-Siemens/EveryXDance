@@ -7,18 +7,18 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModLoader;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 
 import static com.hexagram2021.everyxdance.EveryXDance.MODID;
 import static com.hexagram2021.everyxdance.client.animation.EveryXDanceAnimationPresets.*;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = MODID)
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = MODID)
 public class EveryXDanceClient {
 	@SubscribeEvent
 	public static void onClientSetup(FMLClientSetupEvent event) {
 		CollectDancePresetEvent collectDancePresetEvent = new CollectDancePresetEvent();
-		ModLoader.get().postEventWrapContainerInModOrder(collectDancePresetEvent);
+		ModLoader.postEventWrapContainerInModOrder(collectDancePresetEvent);
 		IDanceableModel.PRESETS.clear();
 		IDanceableModel.PRESETS.addAll(collectDancePresetEvent.getPresets());
 		IDanceableModel.PRESETS.sort(IDanceableModel.Preset::compareTo);

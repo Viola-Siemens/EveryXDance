@@ -42,8 +42,8 @@ public abstract class MobEntityMixin extends LivingEntity implements IDanceableE
 	}
 
 	@Inject(method = "defineSynchedData", at = @At(value = "TAIL"))
-	private void everyxdance$defineDanceData(CallbackInfo ci) {
-		this.getEntityData().define(Data.DATA_IS_DANCE, false);
+	private void everyxdance$defineDanceData(SynchedEntityData.Builder builder, CallbackInfo ci) {
+		builder.define(Data.DATA_IS_DANCE, false);
 	}
 
 	@Unique

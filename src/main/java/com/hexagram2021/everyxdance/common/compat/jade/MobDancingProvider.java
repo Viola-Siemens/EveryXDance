@@ -24,7 +24,7 @@ public enum MobDancingProvider implements IEntityComponentProvider, IServerDataP
 		if(entityAccessor.getServerData().contains(TAG_DANCING_REMAINING)) {
 			int time = entityAccessor.getServerData().getInt(TAG_DANCING_REMAINING);
 			if(time > 0) {
-				iTooltip.add(Component.translatable("jade.everyxdance.remaining.time", IThemeHelper.get().seconds(time)));
+				iTooltip.add(Component.translatable("jade.everyxdance.remaining.time", IThemeHelper.get().seconds(time, entityAccessor.tickRate())));
 			}
 		}
 	}
