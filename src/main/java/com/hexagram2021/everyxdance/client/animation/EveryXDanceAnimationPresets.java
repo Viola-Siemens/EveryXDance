@@ -1,8 +1,8 @@
 package com.hexagram2021.everyxdance.client.animation;
 
 import com.hexagram2021.everyxdance.api.client.DanceAnimation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.joml.Vector3f;
 
 import static com.hexagram2021.everyxdance.api.client.DanceAnimationChannel.*;

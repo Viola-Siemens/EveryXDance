@@ -4,8 +4,8 @@ import com.google.common.collect.Lists;
 import com.hexagram2021.everyxdance.api.client.DanceAnimation;
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.fml.event.IModBusEvent;
+import net.neoforged.bus.api.Event;
+import net.neoforged.fml.event.IModBusEvent;
 
 import java.util.List;
 

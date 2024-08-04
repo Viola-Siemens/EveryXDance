@@ -8,7 +8,7 @@ import net.minecraft.client.model.SnowGolemModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
-import net.minecraftforge.common.MinecraftForge;
+import net.neoforged.neoforge.common.NeoForge;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -100,6 +100,6 @@ public abstract class SnowGolemModelMixin<T extends Entity> implements IDanceabl
 				this.leftArm.z = this.rightArm.z = -13.0F;
 			}
 		}
-		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
+		NeoForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 	}
 }

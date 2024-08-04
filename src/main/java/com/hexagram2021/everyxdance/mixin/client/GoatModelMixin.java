@@ -9,7 +9,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.Panda;
-import net.minecraftforge.common.MinecraftForge;
+import net.neoforged.neoforge.common.NeoForge;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
@@ -41,7 +41,7 @@ public abstract class GoatModelMixin<T extends Panda> extends QuadrupedModel<T> 
 				this.everyxdance$prepareUpperBody();
 			}
 		}
-		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
+		NeoForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 	}
 
 	@Unique

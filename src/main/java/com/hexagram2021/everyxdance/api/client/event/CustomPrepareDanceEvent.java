@@ -2,7 +2,7 @@ package com.hexagram2021.everyxdance.api.client.event;
 
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.client.model.IPrepareDanceModel;
-import net.minecraftforge.eventbus.api.Event;
+import net.neoforged.bus.api.Event;
 
 /**
  * Fired in client side on Forge bus, only when an entity model prepares to dance.

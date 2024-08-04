@@ -11,7 +11,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.IronGolem;
-import net.minecraftforge.common.MinecraftForge;
+import net.neoforged.neoforge.common.NeoForge;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -117,6 +117,6 @@ public abstract class IronGolemModelMixin<T extends IronGolem> implements IDance
 				this.leftArm.z = this.rightArm.z = -11.0F;
 			}
 		}
-		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
+		NeoForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 	}
 }

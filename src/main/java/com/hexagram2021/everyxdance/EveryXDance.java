@@ -1,10 +1,9 @@
 package com.hexagram2021.everyxdance;
 
 import com.hexagram2021.everyxdance.common.config.EveryXDanceCommonConfig;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 
 @Mod(EveryXDance.MODID)
 public class EveryXDance {
@@ -12,6 +11,5 @@ public class EveryXDance {
 
 	public EveryXDance() {
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, EveryXDanceCommonConfig.getConfig());
-		MinecraftForge.EVENT_BUS.register(this);
 	}
 }

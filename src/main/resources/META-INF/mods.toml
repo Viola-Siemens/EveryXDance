@@ -1,27 +1,33 @@
 modLoader="javafml"
-loaderVersion="[46,)"
-license="MIT"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
 issueTrackerURL="https://github.com/Viola-Siemens/EveryXDance/issues"
 
 [[mods]]
-modId="everyxdance"
-version="${file.jarVersion}"
-displayName="EveryXDance"
-logoFile="logo.png"
-credits="Liu Dongyu"
-authors="Hexagram"
-description="As we know, piglins can dance. So can other mobs dance? The answer is YES!"
+    modId="${mod_id}"
+    version="${mod_version}"
+    displayName="${mod_name}"
+    logoFile="logo.png"
+    credits="Hexagram"
+    authors="${mod_authors}"
+    description='''${mod_description}'''
 
-[[dependencies.everyxdance]]
-    modId="forge"
-    mandatory=true
-    versionRange="[46,)"
+[[accessTransformers]]
+    file="META-INF/accesstransformer.cfg"
+
+[[mixins]]
+    config="${mod_id}.mixins.json"
+
+[[dependencies.${mod_id}]]
+    modId="neoforge"
+    type="required"
+    versionRange="${neo_version_range}"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.everyxdance]]
+[[dependencies.${mod_id}]]
     modId="minecraft"
-    mandatory=true
-    versionRange="[1.20,1.21)"
+    type="required"
+    versionRange="${minecraft_version_range}"
     ordering="NONE"
     side="BOTH"

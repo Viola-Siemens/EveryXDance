@@ -12,9 +12,8 @@ import com.hexagram2021.everyxdance.common.util.EveryXDanceLogger;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.IExtensibleEnum;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.Arrays;
 import java.util.List;
@@ -86,7 +85,7 @@ public interface IDanceableModel extends IPrepareDanceModel {
 	record Preset(String name, Preparation preparation, DanceAnimation animation) implements Comparable<Preset> {
 		private static boolean removeDisabled = false;
 
-		public enum Preparation implements IExtensibleEnum {
+		public enum Preparation {
 			HUMANOID_STAND,
 			HUMANOID_SIT,
 			HUMANOID_CRAWL;

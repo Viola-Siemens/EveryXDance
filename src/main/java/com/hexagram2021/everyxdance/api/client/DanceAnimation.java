@@ -5,9 +5,9 @@ import com.google.common.collect.Maps;
 import com.hexagram2021.everyxdance.client.animation.AnimatedModelPart;
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.IExtensibleEnum;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.common.IExtensibleEnum;
 
 import java.util.List;
 import java.util.Map;

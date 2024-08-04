@@ -2,23 +2,23 @@ package com.hexagram2021.everyxdance.common.config;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.List;
 
 import static com.hexagram2021.everyxdance.common.util.RegistryHelper.getRegistryName;
 
 public final class EveryXDanceCommonConfig {
-	private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
-	private static final ForgeConfigSpec SPEC;
+	private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
+	private static final ModConfigSpec SPEC;
 
-	public static final ForgeConfigSpec.IntValue MOB_DANCE_TOTAL_TICKS;
-	public static final ForgeConfigSpec.IntValue MOB_DANCE_POSSIBILITY_ATTACK;
-	public static final ForgeConfigSpec.IntValue MOB_DANCE_POSSIBILITY_BREED;
+	public static final ModConfigSpec.IntValue MOB_DANCE_TOTAL_TICKS;
+	public static final ModConfigSpec.IntValue MOB_DANCE_POSSIBILITY_ATTACK;
+	public static final ModConfigSpec.IntValue MOB_DANCE_POSSIBILITY_BREED;
 
-	public static final ForgeConfigSpec.ConfigValue<List<? extends String>> DISABLED_DANCE_PRESETS;
+	public static final ModConfigSpec.ConfigValue<List<? extends String>> DISABLED_DANCE_PRESETS;
 
-	public static final ForgeConfigSpec.ConfigValue<List<? extends String>> DANCEABLE_MOB_TYPES;
+	public static final ModConfigSpec.ConfigValue<List<? extends String>> DANCEABLE_MOB_TYPES;
 
 	private EveryXDanceCommonConfig() {
 	}
@@ -82,7 +82,7 @@ public final class EveryXDanceCommonConfig {
 		SPEC = BUILDER.build();
 	}
 
-	public static ForgeConfigSpec getConfig() {
+	public static ModConfigSpec getConfig() {
 		return SPEC;
 	}
 }

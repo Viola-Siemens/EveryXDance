@@ -8,7 +8,7 @@ import net.minecraft.client.model.RabbitModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.Rabbit;
-import net.minecraftforge.common.MinecraftForge;
+import net.neoforged.neoforge.common.NeoForge;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -102,6 +102,6 @@ public class RabbitModelMixin<T extends Rabbit> implements IDanceableModel {
 	public void everyxdance$prepareDance(Preset.Preparation preparation, Entity entity) {
 		switch (preparation) {
 		}
-		MinecraftForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
+		NeoForge.EVENT_BUS.post(new CustomPrepareDanceEvent(this, preparation));
 	}
 }

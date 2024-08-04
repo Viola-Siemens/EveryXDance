@@ -5,10 +5,10 @@ import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.common.util.EveryXDanceLogger;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoader;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModLoader;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 
 import static com.hexagram2021.everyxdance.EveryXDance.MODID;
 import static com.hexagram2021.everyxdance.client.animation.EveryXDanceAnimationPresets.*;

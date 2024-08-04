@@ -3,10 +3,10 @@ package com.hexagram2021.everyxdance.common;
 import com.hexagram2021.everyxdance.common.config.EveryXDanceCommonConfig;
 import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
 import net.minecraft.util.RandomSource;
-import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
-import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.entity.living.BabyEntitySpawnEvent;
+import net.neoforged.neoforge.event.entity.living.LivingChangeTargetEvent;
 
 import static com.hexagram2021.everyxdance.EveryXDance.MODID;
 import static com.hexagram2021.everyxdance.common.util.RegistryHelper.getRegistryName;
@@ -29,6 +29,7 @@ public final class ForgeEventHandler {
 		}
 	}
 
+	@SuppressWarnings("ConstantValue")
 	@SubscribeEvent
 	public static void onMobChangeTarget(LivingChangeTargetEvent event) {
 		if(event.getEntity() instanceof IDanceableEntity danceableEntity && event.getOriginalTarget() != null) {
