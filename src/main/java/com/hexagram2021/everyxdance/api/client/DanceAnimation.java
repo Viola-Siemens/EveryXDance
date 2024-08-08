@@ -7,7 +7,6 @@ import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.common.IExtensibleEnum;
 
 import java.util.List;
 import java.util.Map;
@@ -24,7 +23,7 @@ import java.util.function.Function;
 @OnlyIn(Dist.CLIENT)
 public record DanceAnimation(float lengthInSeconds, Map<DancePart, List<DanceAnimationChannel>> animations) {
 	@OnlyIn(Dist.CLIENT)
-	public enum DancePart implements IExtensibleEnum {
+	public enum DancePart {
 		ALL(IDanceableModel::getAll),
 		HEAD(IDanceableModel::everyxdance$getHead),
 		BODY(IDanceableModel::everyxdance$getBody),

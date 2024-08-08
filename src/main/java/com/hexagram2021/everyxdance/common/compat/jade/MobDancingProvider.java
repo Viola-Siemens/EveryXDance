@@ -31,7 +31,7 @@ public enum MobDancingProvider implements IEntityComponentProvider, IServerDataP
 
 	@Override
 	public ResourceLocation getUid() {
-		return new ResourceLocation(MODID, "mob_dancing");
+		return ResourceLocation.fromNamespaceAndPath(MODID, "mob_dancing");
 	}
 
 	@Override

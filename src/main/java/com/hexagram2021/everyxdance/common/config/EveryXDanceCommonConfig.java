@@ -1,6 +1,5 @@
 package com.hexagram2021.everyxdance.common.config;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
@@ -9,6 +8,7 @@ import java.util.List;
 import static com.hexagram2021.everyxdance.common.util.RegistryHelper.getRegistryName;
 
 public final class EveryXDanceCommonConfig {
+	private static final String REGISTRY_NAME_MATCHER = "([a-z0-9_.-]+:[a-z0-9_/.-]+)";
 	private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 	private static final ModConfigSpec SPEC;
 
@@ -28,7 +28,7 @@ public final class EveryXDanceCommonConfig {
 		MOB_DANCE_TOTAL_TICKS = BUILDER.comment("How many ticks (1 sec = 20 ticks) will a dance last. It is recommended to be divisible by 40 or 80.").defineInRange("MOB_DANCE_TOTAL_TICKS", 320, 20, 72000);
 		MOB_DANCE_POSSIBILITY_ATTACK = BUILDER.comment("How possible will a mob dance after killing target or survive from attacking. 0: never, 100: always.").defineInRange("MOB_DANCE_POSSIBILITY_ATTACK", 25, 0, 100);
 		MOB_DANCE_POSSIBILITY_BREED = BUILDER.comment("How possible will a mob dance after breed. 0: never, 100: always.").defineInRange("MOB_DANCE_POSSIBILITY_BREED", 100, 0, 100);
-		DISABLED_DANCE_PRESETS = BUILDER.comment("Dance animations that won't show in your client (only works in client side). See client latest.log and search for \"Dancing Animations\" for getting all dancing animations.").defineListAllowEmpty("DISABLED_DANCE_PRESETS", List.of(), o -> o instanceof String);
+		DISABLED_DANCE_PRESETS = BUILDER.comment("Dance animations that won't show in your client (only works in client side). See client latest.log and search for \"Dancing Animations\" for getting all dancing animations.").defineListAllowEmpty("DISABLED_DANCE_PRESETS", List.of(), () -> "everyxdance:example_preset", o -> o instanceof String);
 		DANCEABLE_MOB_TYPES = BUILDER.comment("Entity types for those who can dance (only works in server side). During their dance, they will not attack other entities.").defineList("DANCEABLE_MOB_TYPES", List.of(
 				getRegistryName(EntityType.AXOLOTL).toString(),
 				getRegistryName(EntityType.CAT).toString(),
@@ -77,7 +77,7 @@ public final class EveryXDanceCommonConfig {
 				getRegistryName(EntityType.ZOMBIE_HORSE).toString(),
 				getRegistryName(EntityType.ZOMBIFIED_PIGLIN).toString(),
 				getRegistryName(EntityType.ZOGLIN).toString()
-		), o -> o instanceof String str && ResourceLocation.isValidResourceLocation(str));
+		), () -> "everyxdance:entity_type", o -> o instanceof String str && str.matches(REGISTRY_NAME_MATCHER));
 		BUILDER.pop();
 		SPEC = BUILDER.build();
 	}

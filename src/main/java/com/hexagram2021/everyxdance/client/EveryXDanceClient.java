@@ -26,12 +26,12 @@ public class EveryXDanceClient {
 	}
 	@SubscribeEvent
 	public static void onCollectDancePreset(CollectDancePresetEvent event) {
-		event.register(new ResourceLocation(MODID, "piglin_dance"), IDanceableModel.Preset.Preparation.HUMANOID_STAND, PIGLIN_DANCE);
-		event.register(new ResourceLocation(MODID, "subject3"), IDanceableModel.Preset.Preparation.HUMANOID_STAND, SUBJECT3);
-		event.register(new ResourceLocation(MODID, "gangnam_style"), IDanceableModel.Preset.Preparation.HUMANOID_STAND, GANGNAM_STYLE);
-		event.register(new ResourceLocation(MODID, "california_gurls"), IDanceableModel.Preset.Preparation.HUMANOID_STAND, CALIFORNIA_GURLS);
-		event.register(new ResourceLocation(MODID, "groove_battle"), IDanceableModel.Preset.Preparation.HUMANOID_SIT, GROOVE_BATTLE);
-		event.register(new ResourceLocation(MODID, "chippy_chippy_chappa_chappa"), IDanceableModel.Preset.Preparation.HUMANOID_CRAWL, CHIPPY_CHIPPY_CHAPPA_CHAPPA);
+		event.register(ResourceLocation.fromNamespaceAndPath(MODID, "piglin_dance"), IDanceableModel.Preset.Preparation.HUMANOID_STAND, PIGLIN_DANCE);
+		event.register(ResourceLocation.fromNamespaceAndPath(MODID, "subject3"), IDanceableModel.Preset.Preparation.HUMANOID_STAND, SUBJECT3);
+		event.register(ResourceLocation.fromNamespaceAndPath(MODID, "gangnam_style"), IDanceableModel.Preset.Preparation.HUMANOID_STAND, GANGNAM_STYLE);
+		event.register(ResourceLocation.fromNamespaceAndPath(MODID, "california_gurls"), IDanceableModel.Preset.Preparation.HUMANOID_STAND, CALIFORNIA_GURLS);
+		event.register(ResourceLocation.fromNamespaceAndPath(MODID, "groove_battle"), IDanceableModel.Preset.Preparation.HUMANOID_SIT, GROOVE_BATTLE);
+		event.register(ResourceLocation.fromNamespaceAndPath(MODID, "chippy_chippy_chappa_chappa"), IDanceableModel.Preset.Preparation.HUMANOID_CRAWL, CHIPPY_CHIPPY_CHAPPA_CHAPPA);
 	}
 
 	public static void printPresets() {
