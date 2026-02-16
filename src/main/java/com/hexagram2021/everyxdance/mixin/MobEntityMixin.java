@@ -23,6 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import static com.hexagram2021.everyxdance.common.util.RegistryHelper.getRegistryName;
 
 @Mixin(Mob.class)
+@SuppressWarnings({"java:S100", "java:S116", "java:S2160"})
 public abstract class MobEntityMixin extends LivingEntity implements IDanceableEntity {
 	@Unique
 	private final AnimationState everyXDance$danceAnimationState = new AnimationState();
@@ -71,7 +72,7 @@ public abstract class MobEntityMixin extends LivingEntity implements IDanceableE
 			} else {
 				target = current.getTarget();
 			}
-			if (target != null && target.isDeadOrDying() && EveryXDanceCommonConfig.DANCEABLE_MOB_TYPES.get().contains(getRegistryName(current.getType()).toString()) &&
+			if (target != null && !target.isRemoved() && target.isDeadOrDying() && EveryXDanceCommonConfig.DANCEABLE_MOB_TYPES.get().contains(getRegistryName(current.getType()).toString()) &&
 					RandomSource.create(current.level().getGameTime()).nextInt(100) < EveryXDanceCommonConfig.MOB_DANCE_POSSIBILITY_ATTACK.get()) {
 				this.everyxdance$startDancing();
 			}
