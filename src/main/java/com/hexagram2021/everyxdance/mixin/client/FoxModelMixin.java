@@ -4,6 +4,9 @@ import com.hexagram2021.everyxdance.client.animation.AnimatedModelPart;
 import com.hexagram2021.everyxdance.api.client.event.CustomPrepareDanceEvent;
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.client.model.FoxModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
@@ -21,9 +24,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FoxModel.class)
 public abstract class FoxModelMixin<T extends Fox> implements IDanceableModel {
@@ -48,17 +49,21 @@ public abstract class FoxModelMixin<T extends Fox> implements IDanceableModel {
 	@Unique
 	private boolean everyxdance$reset = true;
 
-	@Redirect(method = "createBodyLayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/geom/builders/CubeListBuilder;addBox(FFFFFFLnet/minecraft/client/model/geom/builders/CubeDeformation;)Lnet/minecraft/client/model/geom/builders/CubeListBuilder;", ordinal = 1))
-	private static CubeListBuilder everyxdance$modifyCube(CubeListBuilder instance, float originX, float originY, float originZ, float dimensionX, float dimensionY, float dimensionZ, CubeDeformation deformation) {
-		return instance.addBox(originX - 6.0F, originY, originZ, dimensionX, dimensionY, dimensionZ, deformation);
+	@WrapOperation(method = "createBodyLayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/geom/builders/CubeListBuilder;addBox(FFFFFFLnet/minecraft/client/model/geom/builders/CubeDeformation;)Lnet/minecraft/client/model/geom/builders/CubeListBuilder;", ordinal = 1))
+	private static CubeListBuilder everyxdance$modifyCube(CubeListBuilder instance,
+														  float originX, float originY, float originZ,
+														  float dimensionX, float dimensionY, float dimensionZ,
+														  CubeDeformation deformation, Operation<CubeListBuilder> original) {
+		return original.call(instance, originX - 6.0F, originY, originZ, dimensionX, dimensionY, dimensionZ, deformation);
 	}
 
-	@Inject(method = "createBodyLayer", at = @At(value = "RETURN"))
-	private static void everyxdance$modifyPivot(CallbackInfoReturnable<LayerDefinition> cir) {
-		PartDefinition rightArm = cir.getReturnValue().mesh.getRoot().getChild("right_front_leg");
+	@ModifyReturnValue(method = "createBodyLayer", at = @At(value = "RETURN"))
+	private static LayerDefinition everyxdance$modifyPivot(LayerDefinition original) {
+		PartDefinition rightArm = original.mesh.getRoot().getChild("right_front_leg");
 		rightArm.partPose.x = 1.0F;
-		PartDefinition rightLeg = cir.getReturnValue().mesh.getRoot().getChild("right_hind_leg");
+		PartDefinition rightLeg = original.mesh.getRoot().getChild("right_hind_leg");
 		rightLeg.partPose.x = 1.0F;
+		return original;
 	}
 
 	@Inject(method = "prepareMobModel(Lnet/minecraft/world/entity/animal/Fox;FFF)V", at = @At(value = "TAIL"))

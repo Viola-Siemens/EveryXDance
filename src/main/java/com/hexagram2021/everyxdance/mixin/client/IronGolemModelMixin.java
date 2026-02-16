@@ -4,6 +4,7 @@ import com.hexagram2021.everyxdance.client.animation.AnimatedModelPart;
 import com.hexagram2021.everyxdance.api.client.event.CustomPrepareDanceEvent;
 import com.hexagram2021.everyxdance.client.model.IDanceableModel;
 import com.hexagram2021.everyxdance.common.entity.IDanceableEntity;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.client.model.IronGolemModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
@@ -19,7 +20,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(IronGolemModel.class)
 public abstract class IronGolemModelMixin<T extends IronGolem> implements IDanceableModel {
@@ -42,14 +42,15 @@ public abstract class IronGolemModelMixin<T extends IronGolem> implements IDance
 	@Unique
 	private boolean everyxdance$reset = true;
 
-	@Inject(method = "createBodyLayer", at = @At("RETURN"))
-	private static void everyxdance$modifyPivot(CallbackInfoReturnable<LayerDefinition> cir) {
-		PartDefinition leftArm = cir.getReturnValue().mesh.getRoot().getChild("left_arm");
+	@ModifyReturnValue(method = "createBodyLayer", at = @At("RETURN"))
+	private static LayerDefinition everyxdance$modifyPivot(LayerDefinition original) {
+		PartDefinition leftArm = original.mesh.getRoot().getChild("left_arm");
 		leftArm.partPose.x = 10.0F;
 		leftArm.cubes.forEach(cubeDefinition -> cubeDefinition.origin.add(-10.0F, 0.0F, 0.0F));
-		PartDefinition rightArm = cir.getReturnValue().mesh.getRoot().getChild("right_arm");
+		PartDefinition rightArm = original.mesh.getRoot().getChild("right_arm");
 		rightArm.partPose.x = -10.0F;
 		rightArm.cubes.forEach(cubeDefinition -> cubeDefinition.origin.add(10.0F, 0.0F, 0.0F));
+		return original;
 	}
 
 	@Inject(method = "setupAnim(Lnet/minecraft/world/entity/animal/IronGolem;FFFFF)V", at = @At(value = "RETURN"))
