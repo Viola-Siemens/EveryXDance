@@ -102,8 +102,8 @@ public abstract class HumanoidModelMixin<T extends LivingEntity> implements IDan
 				this.body.xRot = Mth.HALF_PI;
 				this.body.y = 10.0F;
 				this.body.z = -10.0F;
-				this.head.y = 12.0F;
-				this.head.z = -14.0F;
+				this.hat.y = this.head.y = 12.0F;
+				this.hat.z = this.head.z = -14.0F;
 				this.leftArm.xRot = this.rightArm.xRot = 0.0F;
 				this.leftArm.y = this.rightArm.y = 12.0F;
 				this.leftArm.z = this.rightArm.z = -8.0F;
