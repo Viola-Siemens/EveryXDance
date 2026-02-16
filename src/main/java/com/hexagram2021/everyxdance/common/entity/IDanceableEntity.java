@@ -3,6 +3,7 @@ package com.hexagram2021.everyxdance.common.entity;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.world.entity.AnimationState;
 
+@SuppressWarnings("java:S100")
 public interface IDanceableEntity {
 	boolean everyxdance$isDancing();
 	int everyxdance$getRemainingDanceTick();
@@ -17,9 +18,12 @@ public interface IDanceableEntity {
 
 	AnimationState everyxdance$getAnimationState();
 
-
+	@SuppressWarnings({"java:S1444", "java:S3008"})
 	final class Data {
 		@SuppressWarnings("NotNullFieldNotInitialized")
 		public static EntityDataAccessor<Boolean> DATA_IS_DANCE;
+
+		private Data() {
+		}
 	}
 }
