@@ -19,7 +19,7 @@ plugins {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '1.0.0'
+version = project.mod_version
 group = 'com.hexagram2021.everyxdance'
 
 base {
