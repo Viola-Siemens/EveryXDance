@@ -146,11 +146,15 @@ repositories {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.20.1-47.2.0'
-    
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    annotationProcessor 'org.spongepowered:mixin:0.8.7:processor'
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0"))
     
     runtimeOnly fg.deobf("mezz.jei:jei-1.20.1-forge:15.2.0.27")
     implementation fg.deobf("curse.maven:jade-324717:4801177")
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0")) {
+        jarJar.ranged(it, "[0,)")
+    }
 }
 
 jar {
